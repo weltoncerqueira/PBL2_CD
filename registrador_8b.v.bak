@@ -1,0 +1,79 @@
+
+//M[odulo do registrador de 8 bits
+
+module registrador_8b (
+	input clk;  
+	input rst;
+	input enable
+	input  [7:0] D; 
+	output [7:0] Q; 
+);
+
+	wire [7:0] p;
+	wire [7:0] ponte;
+	
+	end (p[0], D[0], enable);
+	end (p[1], D[1], enable);
+	end (p[2], D[2], enable);
+	end (p[3], D[3], enable);
+	end (p[4], D[4], enable);
+	end (p[5], D[5], enable);
+	end (p[6], D[6], enable);
+	end (p[7], D[7], enable);
+	
+	
+	ff_D FFD7 (
+		.D(p[0]),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD6 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD5 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD4 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD3 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD2 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD1 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);
+	
+		ff_D FFD0 (
+		.D(),
+		.clk(clk),
+		.reset(rst),
+		.Q(),	
+	);

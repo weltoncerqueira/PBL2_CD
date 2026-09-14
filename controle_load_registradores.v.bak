@@ -1,0 +1,14 @@
+
+module controle_load_registradores (
+	 input  wire        clk,
+    input  wire        reset,
+    input  wire        botao,      // botão bruto
+    input  wire signed [7:0] sw, // SW[7:0]
+
+    output wire signed [7:0] a_reg,
+    output wire signed [7:0] b_reg,
+    output wire signed [7:0] c_reg,
+    output wire [1:0]  load_count 
+);
+
+	

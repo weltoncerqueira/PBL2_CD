@@ -1,0 +1,11 @@
+
+module decoder_abc (
+	input key_pulse,
+	input [1:0] count,
+	output sel_a, sel_b, selc 
+
+);
+
+
+endmodule
+	

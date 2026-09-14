@@ -1,0 +1,22 @@
+
+module contador_2b (
+  input clk, 
+  input rst,
+  input b1,
+  output [1:0] count
+
+);
+
+	ff_T (
+		.t(b1),
+		.clk(clk),
+		.rst(rst),
+		.t(t[0]),
+	);
+	
+	ff_T (
+		.t(t[0]),
+		.clk(clk),
+		.rst(rst),
+		.t(t[1]),
+	);
