@@ -12,21 +12,14 @@ module controle_load_registradores (
 
     wire [1:0] count;
     wire sel_a, sel_b, sel_c;
-    wire botao_debounced;   // nível estável (renomeado, sem "pulse" no nome)
     wire botao_pulse;       // pulso de 1 ciclo — este é o que os demais blocos precisam
 
-	 // Elimina o ruído mecânico do botão e gera um nível lógico limpo
-    debounce debounce_1 (
-        .botao(botao),
+	 
+	 // captura um pulso único do botão
+    detector_de_borda borda_1 (
         .clk(clk),
         .rst(reset),
-        .botao_debounced(botao_debounced)
-    );
-	 // Transforma esse nível estável em um pulso único com duração de 1 ciclo de relógio (botao_pulse)
-    edge_detect edge_1 (
-        .clk(clk),
-        .rst(reset),
-        .sinal_estavel(botao_debounced),
+        .sinal(botao),
         .pulso(botao_pulse)
     );
 

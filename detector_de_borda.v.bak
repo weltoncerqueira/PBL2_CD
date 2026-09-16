@@ -1,0 +1,30 @@
+// ============================================================================
+// Módulo: edge_detect
+// Descrição: Detector de borda de descida (1 -> 0). Com base na convenção de 
+//            botões ativos em nível baixo (como os botões KEY da DE10-Lite), 
+//            este módulo compara o sinal atual com a versão atrasada em 1 ciclo 
+//            para gerar um pulso único de duração exata de 1 ciclo de clock no 
+//            momento em que o botão é pressionado.
+// ============================================================================
+module detector_de_borda (
+    input  clk,
+    input  rst,
+    input  sinal_estavel,   // 1 = solto, 0 = pressionado (convenção KEY da DE10-Lite)
+    output pulso
+);
+
+    wire sinal_atrasado;
+    wire not_estavel;
+
+    ff_D FF_ATRASO (
+        .D(sinal_estavel),
+        .clk(clk),
+        .reset(rst),
+        .Q(sinal_atrasado)
+    );
+
+    // pulso na transição 1 -> 0 (solto -> pressionado)
+    not (not_estavel, sinal_estavel);
+    and (pulso, sinal_atrasado, not_estavel);
+
+endmodule
