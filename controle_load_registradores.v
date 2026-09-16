@@ -7,8 +7,23 @@ module controle_load_registradores (
 
     output [7:0] reg_a,
     output [7:0] reg_b,
-    output [7:0] reg_c
+    output [7:0] reg_c,
+	 
+	 output led0, led1, led2, led3, led4, led5, led6, led7, led8
 );
+
+	 // saida dos leds para teste
+	 assign led0 = sel_a;
+	 assign led1 = sel_b;
+	 assign led2 = sel_c;
+	 assign led3 = 1'b0;
+	 assign led4 = 1'b0;
+	 assign led5 = 1'b0;
+	 assign led6 = 1'b0;
+	 assign led7 = 1'b0;
+	 assign led8 = 1'b0;
+	 
+	 
 
     wire [1:0] count;
     wire sel_a, sel_b, sel_c;
