@@ -1,0 +1,44 @@
+B:/altera/PBL2_CD/contador_2b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/contador_2b.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module contador_2b_ComPausa
+-- Compiling module ff_T
+
+Top level modules:
+	contador_2b_ComPausa
+
+} {} {}} B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module tb_contador_2b_ComPausa
+
+Top level modules:
+	tb_contador_2b_ComPausa
+
+} {} {}} B:/altera/PBL2_CD/registrador_8b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/registrador_8b.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module registrador_8b
+
+Top level modules:
+	registrador_8b
+
+} {} {}} B:/altera/PBL2_CD/mux21_1b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/mux21_1b.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux21_1b
+
+Top level modules:
+	mux21_1b
+
+} {} {}} B:/altera/PBL2_CD/ff_D.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/ff_D.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ff_D
+
+Top level modules:
+	ff_D
+
+} {} {}} B:/altera/PBL2_CD/decoder_abc.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/decoder_abc.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module decoder_abc
+
+Top level modules:
+	decoder_abc
+
+} {} {}}

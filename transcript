@@ -1,0 +1,121 @@
+# Compile of contador_2b.v was successful.
+# Compile of controle_load_registradores.v was successful.
+# Compile of debounce.v was successful.
+# Compile of decoder_abc.v was successful.
+# Compile of ff_D.v was successful.
+# Compile of mux21_1b.v was successful.
+# Compile of registrador_8b.v was successful.
+# Compile of registrador_8b_tb.v was successful.
+# 8 compiles, 0 failed with no errors.
+# Load canceled
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:45:22 on Sep 15,2026
+# vlog -reportprogress 300 contador_2b.v controle_load_registradores.v debounce.v decoder_abc.v ff_D.v mux21_1b.v registrador_8b.v registrador_8b_tb.v 
+# -- Compiling module contador_2b_ComPausa
+# -- Compiling module ff_T
+# -- Compiling module controle_load_registradores
+# -- Compiling module debounce
+# -- Compiling module edge_detect
+# -- Compiling module sincronizador_2ff
+# -- Compiling module estado_botao
+# -- Compiling module contador_debounce_19b
+# -- Compiling module decoder_abc
+# -- Compiling module ff_D
+# -- Compiling module mux21_1b
+# -- Compiling module registrador_8b
+# -- Compiling module registrador_8b_tb
+# 
+# Top level modules:
+# 	controle_load_registradores
+# 	registrador_8b_tb
+# End time: 16:45:23 on Sep 15,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.registrador_8b_tb
+# vsim -voptargs=""+acc"" work.registrador_8b_tb 
+# Start time: 16:45:23 on Sep 15,2026
+# Loading work.registrador_8b_tb
+# Loading work.registrador_8b
+# Loading work.mux21_1b
+# Loading work.ff_D
+add wave -r /*
+run -all
+# Tempo=0 | rst=0 | enable=0 | D=0x00 (00000000) | S=0xxx (xxxxxxxx)
+# Tempo=2000 | rst=1 | enable=0 | D=0x00 (00000000) | S=0xxx (xxxxxxxx)
+# Tempo=5000 | rst=1 | enable=0 | D=0x00 (00000000) | S=0x00 (00000000)
+# Tempo=12000 | rst=0 | enable=0 | D=0x00 (00000000) | S=0x00 (00000000)
+# Tempo=20000 | rst=0 | enable=0 | D=0xaa (10101010) | S=0x00 (00000000)
+# Tempo=40000 | rst=0 | enable=1 | D=0xaa (10101010) | S=0x00 (00000000)
+# Tempo=45000 | rst=0 | enable=1 | D=0xaa (10101010) | S=0xaa (10101010)
+# Tempo=60000 | rst=0 | enable=0 | D=0x55 (01010101) | S=0xaa (10101010)
+# Tempo=80000 | rst=0 | enable=1 | D=0x55 (01010101) | S=0xaa (10101010)
+# Tempo=85000 | rst=0 | enable=1 | D=0x55 (01010101) | S=0x55 (01010101)
+# Tempo=100000 | rst=1 | enable=1 | D=0x55 (01010101) | S=0x55 (01010101)
+# Tempo=105000 | rst=1 | enable=1 | D=0x55 (01010101) | S=0x00 (00000000)
+# Tempo=110000 | rst=0 | enable=1 | D=0x55 (01010101) | S=0x00 (00000000)
+# Tempo=115000 | rst=0 | enable=1 | D=0x55 (01010101) | S=0x55 (01010101)
+# Simulação concluída com sucesso.
+# ** Note: $finish    : registrador_8b_tb.v(70)
+#    Time: 120 ns  Iteration: 0  Instance: /registrador_8b_tb
+# 1
+# Break in Module registrador_8b_tb at registrador_8b_tb.v line 70
+
+# Compile of tb_contador_2b_ComPausa.v was successful.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:50:06 on Sep 15,2026
+# vlog -reportprogress 300 contador_2b.v controle_load_registradores.v debounce.v decoder_abc.v ff_D.v mux21_1b.v registrador_8b.v registrador_8b_tb.v tb_contador_2b_ComPausa.v 
+# -- Compiling module contador_2b_ComPausa
+# -- Compiling module ff_T
+# -- Compiling module controle_load_registradores
+# -- Compiling module debounce
+# -- Compiling module edge_detect
+# -- Compiling module sincronizador_2ff
+# -- Compiling module estado_botao
+# -- Compiling module contador_debounce_19b
+# -- Compiling module decoder_abc
+# -- Compiling module ff_D
+# -- Compiling module mux21_1b
+# -- Compiling module registrador_8b
+# -- Compiling module registrador_8b_tb
+# -- Compiling module tb_contador_2b_ComPausa
+# 
+# Top level modules:
+# 	controle_load_registradores
+# 	registrador_8b_tb
+# 	tb_contador_2b_ComPausa
+# End time: 16:50:06 on Sep 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_contador_2b_ComPausa
+# End time: 16:50:08 on Sep 15,2026, Elapsed time: 0:04:45
+# Errors: 0, Warnings: 8
+# vsim -voptargs=""+acc"" work.tb_contador_2b_ComPausa 
+# Start time: 16:50:08 on Sep 15,2026
+# Loading work.tb_contador_2b_ComPausa
+# Loading work.contador_2b_ComPausa
+# Loading work.ff_T
+add wave -r /*
+run -all
+# Tempo=0 ps | rst=0 | b=0 | cont=xx (x)
+# Tempo=2000 ps | rst=1 | b=0 | cont=xx (x)
+# Tempo=5000 ps | rst=1 | b=0 | cont=00 (0)
+# Tempo=12000 ps | rst=0 | b=0 | cont=00 (0)
+# Tempo=20000 ps | rst=0 | b=1 | cont=00 (0)
+# Tempo=25000 ps | rst=0 | b=1 | cont=01 (1)
+# Tempo=35000 ps | rst=0 | b=1 | cont=10 (2)
+# Tempo=45000 ps | rst=0 | b=1 | cont=11 (3)
+# Tempo=60000 ps | rst=0 | b=0 | cont=11 (3)
+# Tempo=90000 ps | rst=0 | b=1 | cont=11 (3)
+# Tempo=120000 ps | rst=1 | b=1 | cont=11 (3)
+# Tempo=125000 ps | rst=1 | b=1 | cont=00 (0)
+# Tempo=130000 ps | rst=0 | b=1 | cont=00 (0)
+# Tempo=135000 ps | rst=0 | b=1 | cont=01 (1)
+# Tempo=145000 ps | rst=0 | b=1 | cont=10 (2)
+# Simulação do contador concluída.
+# ** Note: $finish    : tb_contador_2b_ComPausa.v(62)
+#    Time: 150 ns  Iteration: 0  Instance: /tb_contador_2b_ComPausa
+# 1
+# Break in Module tb_contador_2b_ComPausa at tb_contador_2b_ComPausa.v line 62
+
+# End time: 19:12:01 on Sep 15,2026, Elapsed time: 2:21:53
+# Errors: 0, Warnings: 2

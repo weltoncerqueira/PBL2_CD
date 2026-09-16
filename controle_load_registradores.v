@@ -15,13 +15,14 @@ module controle_load_registradores (
     wire botao_debounced;   // nível estável (renomeado, sem "pulse" no nome)
     wire botao_pulse;       // pulso de 1 ciclo — este é o que os demais blocos precisam
 
+	 // Elimina o ruído mecânico do botão e gera um nível lógico limpo
     debounce debounce_1 (
         .botao(botao),
         .clk(clk),
         .rst(reset),
         .botao_debounced(botao_debounced)
     );
-
+	 // Transforma esse nível estável em um pulso único com duração de 1 ciclo de relógio (botao_pulse)
     edge_detect edge_1 (
         .clk(clk),
         .rst(reset),
@@ -29,31 +30,29 @@ module controle_load_registradores (
         .pulso(botao_pulse)
     );
 
+	 // Conta até 3, com base em cada pulso do botao
     contador_2b_ComPausa contComPausa (
-        .b(botao_pulse),      // <-- corrigido: pulso limpo, não o botão bruto
+        .b(botao_pulse),    
         .clk(clk),
         .rst(reset),
         .cont(count)
     );
-
+	 
+	 // Decodifica o contador para escolher qual registrador receberá o valor das chaves
     decoder_abc abc (
-        .key_pulse(botao_pulse),  // <-- corrigido: pulso limpo, não o nível debounced
+        .key_pulse(botao_pulse),
         .count(count), 
         .sel_a(sel_a), 
         .sel_b(sel_b), 
         .sel_c(sel_c)
     );
-
-    registrador_8b reg8_a (
-        .D(sw), .enable(sel_a), .rst(reset), .clk(clk), .S(reg_a)
-    );
-
-    registrador_8b reg8_b (
-        .D(sw), .enable(sel_b), .rst(reset), .clk(clk), .S(reg_b)
-    );
-
-    registrador_8b reg8_c (
-        .D(sw), .enable(sel_c), .rst(reset), .clk(clk), .S(reg_c)
-    );
+	 
+	 // registrador a
+    registrador_8b reg8_a (.D(sw), .enable(sel_a), .rst(reset), .clk(clk), .S(reg_a));
+	 // registrador b
+    registrador_8b reg8_b (.D(sw), .enable(sel_b), .rst(reset), .clk(clk), .S(reg_b));
+	 // registrador c
+    registrador_8b reg8_c (.D(sw), .enable(sel_c), .rst(reset), .clk(clk), .S(reg_c));
 
 endmodule
+

@@ -1,4 +1,11 @@
-
+// ============================================================================
+// Módulo: debounce
+// Descrição: Módulo principal do filtro de debounce. Recebe o sinal bruto de 
+//            um botão físico, sincroniza o sinal com o relógio do sistema para
+//            evitar metaestabilidade, aguarda a estabilização da entrada por 
+//            um determinado tempo (através de um contador de 19 bits) e atualiza 
+//            a saída apenas quando o valor do botão permanece constante.
+// ============================================================================
 module debounce (
     input clk,
     input rst,
@@ -49,10 +56,10 @@ module debounce (
     // Detecta contador cheio (todos os 19 bits em 1)
     // -------------------------
 
-    and (contador_cheio, cont[0], cont[1], cont[2], cont[3], cont[4],
-                          cont[5], cont[6], cont[7], cont[8], cont[9],
-                          cont[10], cont[11], cont[12], cont[13], cont[14],
-                          cont[15], cont[16], cont[17], cont[18]);
+    and (contador_cheio, cont[0],  cont[1],  cont[2],  cont[3],  cont[4],
+                         cont[5],  cont[6],  cont[7],  cont[8],  cont[9],
+                         cont[10], cont[11], cont[12], cont[13], cont[14],
+                         cont[15], cont[16], cont[17], cont[18]);
 
 
     // -------------------------
@@ -67,36 +74,19 @@ module debounce (
         .Q(estado)
     );
 
-
-    assign botao_debounced = estado;
-
-endmodule
-
-
-module edge_detect (
-    input  clk,
-    input  rst,
-    input  sinal_estavel,   // 1 = solto, 0 = pressionado (convenção KEY da DE10-Lite)
-    output pulso
-);
-
-    wire sinal_atrasado;
-    wire not_estavel;
-
-    ff_D FF_ATRASO (
-        .D(sinal_estavel),
-        .clk(clk),
-        .reset(rst),
-        .Q(sinal_atrasado)
-    );
-
-    // pulso na transição 1 -> 0 (solto -> pressionado)
-    not (not_estavel, sinal_estavel);
-    and (pulso, sinal_atrasado, not_estavel);
+	 // Atualiza a saida com o novo estado
+	 buf (botao_debounced, estado);
 
 endmodule
 
 
+// ============================================================================
+// Módulo: sincronizador_2ff
+// Descrição: Sincronizador de 2 Flip-Flops tipo D em cascata. É usado para 
+//            evitar o fenômeno da metaestabilidade ao ler sinais assíncronos 
+//            externos (como botões físicos) para dentro do domínio de relógio 
+//            da FPGA.
+// ============================================================================
 module sincronizador_2ff (
     input clk,
     input rst,
@@ -123,6 +113,13 @@ module sincronizador_2ff (
 endmodule
 
 
+// ============================================================================
+// Módulo: estado_botao
+// Descrição: Registrador com habilitação (load) para armazenar o estado estável
+//            do botão. Utiliza um MUX 2:1 ligado a um Flip-Flop D para manter 
+//            o valor anterior (Q) até que o sinal 'load' (contador cheio) seja 
+//            acionado, atualizando a saída com o novo estado sincronizado.
+// ============================================================================
 module estado_botao (
     input clk,
     input rst,
@@ -150,6 +147,14 @@ module estado_botao (
 endmodule
 
 
+// ============================================================================
+// Módulo: contador_debounce_19b
+// Descrição: Contador sequencial de 19 bits estruturado a partir de Flip-Flops 
+//            tipo T e lógica de "carry chain". O contador incrementa a cada 
+//            ciclo enquanto o sinal 'mudou' for verdadeiro. Caso ocorra qualquer 
+//            ruído e 'mudou' vá a 0, o contador é resetado para garantir que a 
+//            contagem só atinja o topo após um período contínuo e estável.
+// ============================================================================
 module contador_debounce_19b (
     input  clk,
     input  rst,
@@ -184,5 +189,37 @@ module contador_debounce_19b (
             );
         end
     endgenerate
+
+endmodule
+
+
+// ============================================================================
+// Módulo: edge_detect
+// Descrição: Detector de borda de descida (1 -> 0). Com base na convenção de 
+//            botões ativos em nível baixo (como os botões KEY da DE10-Lite), 
+//            este módulo compara o sinal atual com a versão atrasada em 1 ciclo 
+//            para gerar um pulso único de duração exata de 1 ciclo de clock no 
+//            momento em que o botão é pressionado.
+// ============================================================================
+module edge_detect (
+    input  clk,
+    input  rst,
+    input  sinal_estavel,   // 1 = solto, 0 = pressionado (convenção KEY da DE10-Lite)
+    output pulso
+);
+
+    wire sinal_atrasado;
+    wire not_estavel;
+
+    ff_D FF_ATRASO (
+        .D(sinal_estavel),
+        .clk(clk),
+        .reset(rst),
+        .Q(sinal_atrasado)
+    );
+
+    // pulso na transição 1 -> 0 (solto -> pressionado)
+    not (not_estavel, sinal_estavel);
+    and (pulso, sinal_atrasado, not_estavel);
 
 endmodule

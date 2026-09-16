@@ -35,6 +35,7 @@ module registrador_8b (
     mux21_1b MUX7 (.A(Q[7]), .B(D[7]), .S(enable), .Y(mux_out[7]));
     ff_D     FF7  (.D(mux_out[7]), .clk(clk), .reset(rst), .Q(Q[7]));
 
-    assign S = Q;
+    buf (S, Q);
 
+	 
 endmodule
