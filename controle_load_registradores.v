@@ -27,7 +27,7 @@ module controle_load_registradores (
 
     wire [1:0] count;
     wire sel_a, sel_b, sel_c;
-    wire botao_pulse;       // pulso de 1 ciclo — este é o que os demais blocos precisam
+    wire botao_pulse;       
 
 	 
 	 // captura um pulso único do botão
@@ -40,10 +40,11 @@ module controle_load_registradores (
 
 	 // Conta até 3, com base em cada pulso do botao
     contador_2b_ComPausa contComPausa (
-        .b(botao_pulse),    
+        .pulso(botao_pulse),    
         .clk(clk),
         .rst(reset),
-        .cont(count)
+        .Q1(count[0]),
+		  .Q2(count[1])
     );
 	 
 	 // Decodifica o contador para escolher qual registrador receberá o valor das chaves

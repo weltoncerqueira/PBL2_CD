@@ -2,40 +2,28 @@
 module contador_2b_ComPausa (
     input  clk,
     input  rst,
-    input  b,    //botão fisico
-    output [1:0] cont
+    input  pulso,    //botão fisico
+    output Q1, 
+	 output Q2
 );
 
-    wire not_q1, not_q0, q1_and_q0, not_q1_and_q0;
-	 wire not_q1_and_q0_full;
-    wire T0, T1;
+	wire T1;
 	 
-    not (not_q1, cont[1]);
-    not (not_q0, cont[0]);
-
-    // T0 = b & ~(q1 & q0)
-    and (q1_and_q0, cont[1], cont[0]);
-    not (not_q1_and_q0_full, q1_and_q0);
-    and (T0, b, not_q1_and_q0_full);
-
-    // T1 = b & ~q1 & q0
-    and (not_q1_and_q0, not_q1, cont[0]);
-    and (T1, b, not_q1_and_q0);
-	 
-
 	//flip flops do contador
     ff_T FFT0 (
-        .t(T0),
+        .t(pulso),
         .clk(clk),
         .rst(rst),
-        .q(cont[0])
+        .q(Q1)
     );
+	 
+	 and (T1, pulso, Q1);
 
     ff_T FFT1 (
         .t(T1),
         .clk(clk),
         .rst(rst),
-        .q(cont[1])
+        .q(Q2)
     );
 
 endmodule

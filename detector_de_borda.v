@@ -13,18 +13,24 @@ module detector_de_borda (
     output pulso
 );
 
-    wire sinal_anterior;
-    wire not_anterior;
+    wire Q1, Q2, Q1N;
 
-    ff_D FF_ATRASO (
+    ff_D FF_Detector1 (
         .D(sinal),
         .clk(clk),
         .reset(rst),
-		  .Q(sinal_anterior)
+		  .Q(Q1)
     );
 
-    // pulso na transição 1 -> 0 (solto -> pressionado)
-    not (not_anterior, sinal_anterior);
-    and (pulso, sinal_anterior, not_anterior);
-
+    ff_D FF_Detector2 (
+        .D(Q1),
+        .clk(clk),
+        .reset(rst),
+		  .Q(Q2)
+    );
+	 
+	 not (Q1N, Q1);
+	 and (pulso, Q1N, Q2);
+	
+	 
 endmodule
