@@ -1,0 +1,153 @@
+
+// =====================================================================
+// divider_structural.v
+// Divisor binario NAO-SINALIZADO 4 bits / 4 bits, 100% ESTRUTURAL.
+//
+// Regras seguidas: nenhuma linha usa 'always', 'if' ou 'assign'.
+// Apenas: module/endmodule, input/output, wire, e instanciacao de
+// portas primitivas (and, or, not, xor, buf) e de submodulos.
+//
+// Entrada:  A[3:0] = dividendo   (0 a 15)
+//           B[3:0] = divisor     (1 a 15  -- nao trate B = 0)
+// Saida:    Q[3:0] = quociente   (floor(A/B))
+//           R[3:0] = resto       (A mod B)
+//
+// Algoritmo: divisao restauradora "desenrolada" em 4 estagios (rows),
+// um por bit do dividendo, do MSB (A[3]) ao LSB (A[0]).
+// =====================================================================
+
+
+// ---------------------------------------------------------------------
+// Somador completo (full adder) -- bloco basico, so portas
+// ---------------------------------------------------------------------
+module full_adder(a, b, cin, s, cout);
+    input  a, b, cin;
+    output s, cout;
+
+    wire ab_xor, ab_and, cin_and;
+
+    xor (ab_xor, a, b);
+    xor (s, ab_xor, cin);
+
+    and (ab_and, a, b);
+    and (cin_and, cin, ab_xor);
+    or  (cout, ab_and, cin_and);
+endmodule
+
+
+// ---------------------------------------------------------------------
+// Multiplexador 2:1 de 1 bit -- y = sel ? d1 : d0
+// ---------------------------------------------------------------------
+module mux2(d0, d1, sel, y);
+    input  d0, d1, sel;
+    output y;
+
+    wire nsel, t0, t1;
+
+    not (nsel, sel);
+    and (t0, d0, nsel);
+    and (t1, d1, sel);
+    or  (y, t0, t1);
+endmodule
+
+
+// ---------------------------------------------------------------------
+// Subtrator de 5 bits: diff = a - b  (complemento de 2: a + ~b + 1)
+// borrow = 1 se a < b (subtracao "invalida", precisa restaurar)
+// ---------------------------------------------------------------------
+module sub5(a, b, diff, borrow);
+    input  [4:0] a;
+    input  [4:0] b;
+    output [4:0] diff;
+    output borrow;
+
+    wire [4:0] nb;   // complemento bit a bit de b
+    wire [3:0] c;    // carries internos
+    wire cout;
+
+    not (nb[0], b[0]);
+    not (nb[1], b[1]);
+    not (nb[2], b[2]);
+    not (nb[3], b[3]);
+    not (nb[4], b[4]);
+
+    full_adder fa0(a[0], nb[0], 1'b1, diff[0], c[0]);
+    full_adder fa1(a[1], nb[1], c[0], diff[1], c[1]);
+    full_adder fa2(a[2], nb[2], c[1], diff[2], c[2]);
+    full_adder fa3(a[3], nb[3], c[2], diff[3], c[3]);
+    full_adder fa4(a[4], nb[4], c[3], diff[4], cout);
+
+    not (borrow, cout);
+endmodule
+
+
+// ---------------------------------------------------------------------
+// Um estagio (linha) da divisao restauradora
+// Rin  = resto parcial vindo do estagio anterior (4 bits)
+// Abit = proximo bit do dividendo a ser trazido
+// B    = divisor (4 bits, fixo em todos os estagios)
+// Rout = novo resto parcial (4 bits)
+// Qbit = bit do quociente gerado neste estagio
+// ---------------------------------------------------------------------
+module div_row(Rin, Abit, B, Rout, Qbit);
+    input  [3:0] Rin;
+    input  Abit;
+    input  [3:0] B;
+    output [3:0] Rout;
+    output Qbit;
+
+    wire [4:0] Rshift;  // Rin deslocado 1 bit p/ esquerda + Abit entrando no LSB
+    wire [4:0] Bext;    // B estendido para 5 bits (bit extra = 0)
+    wire [4:0] diff;
+    wire borrow;
+
+    // Rshift = {Rin[3:0], Abit}  -- feito com buf, sem assign
+    buf (Rshift[0], Abit);
+    buf (Rshift[1], Rin[0]);
+    buf (Rshift[2], Rin[1]);
+    buf (Rshift[3], Rin[2]);
+    buf (Rshift[4], Rin[3]);
+
+    // Bext = {1'b0, B[3:0]}
+    buf (Bext[0], B[0]);
+    buf (Bext[1], B[1]);
+    buf (Bext[2], B[2]);
+    buf (Bext[3], B[3]);
+    buf (Bext[4], 1'b0);
+
+    sub5 s0(Rshift, Bext, diff, borrow);
+
+    // Se borrow=1 (deu negativo), restaura Rshift; senao usa diff
+    mux2 m0(diff[0], Rshift[0], borrow, Rout[0]);
+    mux2 m1(diff[1], Rshift[1], borrow, Rout[1]);
+    mux2 m2(diff[2], Rshift[2], borrow, Rout[2]);
+    mux2 m3(diff[3], Rshift[3], borrow, Rout[3]);
+
+    not (Qbit, borrow);   // borrow=0 -> Qbit=1 ; borrow=1 -> Qbit=0
+endmodule
+
+
+// ---------------------------------------------------------------------
+// Divisor 4x4 completo: 4 estagios em cascata
+// ---------------------------------------------------------------------
+module divider_structural(A, B, Q, R);
+    input  [3:0] A;   // dividendo
+    input  [3:0] B;   // divisor (nao usar B = 0)
+    output [3:0] Q;   // quociente = floor(A/B)
+    output [3:0] R;   // resto     = A mod B
+
+    wire [3:0] R0;         // resto inicial, tied em 0000
+    wire [3:0] R1, R2, R3; // restos intermediarios entre estagios
+
+    buf (R0[0], 1'b0);
+    buf (R0[1], 1'b0);
+    buf (R0[2], 1'b0);
+    buf (R0[3], 1'b0);
+
+    // Processa do bit mais significativo (A[3]) ao menos significativo (A[0])
+    div_row row3(R0, A[3], B, R1, Q[3]);
+    div_row row2(R1, A[2], B, R2, Q[2]);
+    div_row row1(R2, A[1], B, R3, Q[1]);
+    div_row row0(R3, A[0], B, R,  Q[0]);
+
+endmodule

@@ -1,0 +1,20 @@
+# Compile of calculo_delta.v was successful.
+# Compile of complementoDe2_8bits.v was successful.
+# Compile of contador_2b.v was successful.
+# Compile of controle_load_registradores.v failed with 6 errors.
+# Compile of decoder_abc.v was successful.
+# Compile of detector_de_borda.v was successful.
+# Compile of divisor_8bits.sv was successful.
+# Compile of divisor_8x8_sinalizado.v was successful.
+# Compile of ff_D.v was successful.
+# Compile of multiplicador_8x8.v was successful.
+# Compile of multiplicador_8x8_sinalizado.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of raiz_Quadrada.v was successful.
+# Compile of registrador_8b.v failed with 1 errors.
+# Compile of registrador_8b_tb.v was successful.
+# Compile of somador_completo.v was successful.
+# Compile of tb_calculo_delta.v was successful.
+# Compile of valor_absoluto.sv was successful.
+# Compile of valor_absoluto.v was successful.
+# 19 compiles, 2 failed with 7 errors.

@@ -1,4 +1,18 @@
-B:/altera/PBL2_CD/contador_2b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/contador_2b.v
+B:/altera/PBL2_CD/mux_2x1.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/mux_2x1.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux_2x1
+
+Top level modules:
+	mux_2x1
+
+} {} {}} B:/altera/PBL2_CD/divisor_8x8_sinalizado.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/divisor_8x8_sinalizado.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module divisor_8x8_sinalizado
+
+Top level modules:
+	divisor_8x8_sinalizado
+
+} {} {}} B:/altera/PBL2_CD/contador_2b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/contador_2b.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module contador_2b_ComPausa
 -- Compiling module ff_T
@@ -6,19 +20,21 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	contador_2b_ComPausa
 
-} {} {}} B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v
+} {} {}} B:/altera/PBL2_CD/valor_absoluto.sv {1 {vlog -work work -sv -stats=none B:/altera/PBL2_CD/valor_absoluto.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module tb_contador_2b_ComPausa
+-- Compiling module valor_absoluto
 
 Top level modules:
-	tb_contador_2b_ComPausa
+	valor_absoluto
 
-} {} {}} B:/altera/PBL2_CD/registrador_8b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/registrador_8b.v
+} {} {}} B:/altera/PBL2_CD/somador_completo.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/somador_completo.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module registrador_8b
+-- Compiling module somador_completo
+-- Compiling module meio_somador
 
 Top level modules:
-	registrador_8b
+	somador_completo
+	meio_somador
 
 } {} {}} B:/altera/PBL2_CD/mux21_1b.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/mux21_1b.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -34,6 +50,41 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	ff_D
 
+} {} {}} B:/altera/PBL2_CD/complementoDe2_8bits.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/complementoDe2_8bits.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module complementoDe2_8bits
+
+Top level modules:
+	complementoDe2_8bits
+
+} {} {}} B:/altera/PBL2_CD/multiplicador_8x8.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/multiplicador_8x8.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module multiplicador_8x8
+
+Top level modules:
+	multiplicador_8x8
+
+} {} {}} B:/altera/PBL2_CD/tb_calculo_delta.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_calculo_delta.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module tb_calculo_delta
+
+Top level modules:
+	tb_calculo_delta
+
+} {} {}} B:/altera/PBL2_CD/detector_de_borda.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/detector_de_borda.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module detector_de_borda
+
+Top level modules:
+	detector_de_borda
+
+} {} {}} B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module tb_contador_2b_ComPausa
+
+Top level modules:
+	tb_contador_2b_ComPausa
+
 } {} {}} B:/altera/PBL2_CD/decoder_abc.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/decoder_abc.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module decoder_abc
@@ -41,4 +92,66 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	decoder_abc
 
-} {} {}}
+} {} {}} B:/altera/PBL2_CD/valor_absoluto.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/valor_absoluto.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+
+} {} {}} B:/altera/PBL2_CD/registrador_8b_tb.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/registrador_8b_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module registrador_8b_tb
+
+Top level modules:
+	registrador_8b_tb
+
+} {} {}} B:/altera/PBL2_CD/calculo_delta.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/calculo_delta.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module calculo_delta
+-- Compiling module subtrator_18bits
+
+Top level modules:
+	calculo_delta
+
+} {} {}} B:/altera/PBL2_CD/divisor_8bits.sv {1 {vlog -work work -sv -stats=none B:/altera/PBL2_CD/divisor_8bits.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module subtrator
+-- Compiling module divisor
+-- Compiling module divisor_8bits
+
+Top level modules:
+	divisor_8bits
+
+} {} {}} B:/altera/PBL2_CD/multiplicador_8x8_sinalizado.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/multiplicador_8x8_sinalizado.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module multiplicador_8x8_sinalizado
+-- Compiling module complementoDe2_16bits
+
+Top level modules:
+	multiplicador_8x8_sinalizado
+
+} {} {}} B:/altera/PBL2_CD/registrador_8b.v {0 {vlog -work work -stats=none B:/altera/PBL2_CD/registrador_8b.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module registrador_8b
+** Error: B:/altera/PBL2_CD/registrador_8b.v(38): Primitive output connection must be a scalar net.
+
+} {4.0 5.0} {}} B:/altera/PBL2_CD/raiz_Quadrada.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/raiz_Quadrada.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module full_adder
+-- Compiling module mux2
+-- Compiling module adder8
+-- Compiling module sub8
+-- Compiling module sqrt_stage
+-- Compiling module raiz_Quadrada
+
+Top level modules:
+	raiz_Quadrada
+
+} {} {}} B:/altera/PBL2_CD/controle_load_registradores.v {0 {vlog -work work -stats=none B:/altera/PBL2_CD/controle_load_registradores.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module controle_load_registradores
+** Error: B:/altera/PBL2_CD/controle_load_registradores.v(16): (vlog-2730) Undefined variable: 'sel_a'.
+** Error: B:/altera/PBL2_CD/controle_load_registradores.v(17): (vlog-2730) Undefined variable: 'sel_b'.
+** Error: B:/altera/PBL2_CD/controle_load_registradores.v(18): (vlog-2730) Undefined variable: 'sel_c'.
+** Error (suppressible): B:/altera/PBL2_CD/controle_load_registradores.v(29): (vlog-2388) 'sel_a' already declared in this scope (controle_load_registradores) at B:/altera/PBL2_CD/controle_load_registradores.v(16).
+** Error (suppressible): B:/altera/PBL2_CD/controle_load_registradores.v(29): (vlog-2388) 'sel_b' already declared in this scope (controle_load_registradores) at B:/altera/PBL2_CD/controle_load_registradores.v(17).
+** Error (suppressible): B:/altera/PBL2_CD/controle_load_registradores.v(29): (vlog-2388) 'sel_c' already declared in this scope (controle_load_registradores) at B:/altera/PBL2_CD/controle_load_registradores.v(18).
+
+} {4.0 7.0} {}}

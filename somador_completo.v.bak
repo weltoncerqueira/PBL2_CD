@@ -1,0 +1,30 @@
+
+module somador_completo (
+    input  wire A,
+    input  wire B,
+    input  wire cin,
+    output wire S,
+    output wire cout
+);
+
+    // Fios internos para interconectar as portas lógicas
+    wire axorb;
+    wire aandb;
+    wire cin_and_axorb;
+
+    // 1. axorb = A XOR B
+    xor u1 (axorb, A, B);
+
+    // 2. S = (A XOR B) XOR Cin
+    xor u2 (S, axorb, cin);
+
+    // 3. aandb = A AND B
+    and u3 (aandb, A, B);
+
+    // 4. cin_and_axorb = Cin AND (A XOR B)
+    and u4 (cin_and_axorb, cin, axorb);
+
+    // 5. Cout = (A AND B) OR (Cin AND (A XOR B))
+    or  u5 (cout, aandb, cin_and_axorb);
+	 
+endmodule

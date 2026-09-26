@@ -1,0 +1,19 @@
+
+// Função: Retorna o valor absoluto de um número em complemento de 2, seja o valor negativo ou positivo
+module valor_absoluto (
+    input  wire [7:0] entrada,
+    output wire [7:0] valor_absoluto
+);
+    wire bs;
+    
+    // captura o bit de sinal
+	 buf b1 (bs, entrada[7]);
+    
+    // Calcula o complemento de 2 e verifica se usa o complemento ou não
+    complementoDe2_8bits complemento_8bit (
+	 .A(entrada), 
+	 .bs(bs),
+	 .out(valor_absoluto)
+	 );
+	 
+endmodule
