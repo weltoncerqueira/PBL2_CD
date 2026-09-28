@@ -1,0 +1,8 @@
+
+module divisor_8x8_sinalizado (
+	input A,
+	input B,
+	output S
+);
+
+	

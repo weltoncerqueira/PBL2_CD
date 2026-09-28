@@ -1,0 +1,103 @@
+# Compile of valor_absoluto.v was successful.
+# Compile of valor_absoluto.sv was successful.
+# Compile of tb_calculo_delta.v was successful.
+# Compile of somador_completo.v was successful.
+# Compile of raiz_Quadrada.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of multiplicador_8x8_sinalizado.v was successful.
+# Compile of multiplicador_8x8.v was successful.
+# Compile of ff_D.v was successful.
+# Compile of divisor_8x8_sinalizado.v was successful.
+# Compile of divisor_8bits.sv was successful.
+# Compile of detector_de_borda.v was successful.
+# Compile of decoder_abc.v was successful.
+# Compile of controle_load_registradores.v failed with 6 errors.
+# Compile of contador_2b.v was successful.
+# Compile of complementoDe2_8bits.v was successful.
+# Compile of calculo_delta.v was successful.
+# 17 compiles, 1 failed with 6 errors.
+# Compile of controle_load_registradores.v failed with 6 errors.
+# Compile of controle_load_registradores.v was successful.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 18:37:29 on Sep 26,2026
+# vlog -reportprogress 300 calculo_delta.v complementoDe2_8bits.v contador_2b.v controle_load_registradores.v decoder_abc.v detector_de_borda.v divisor_8x8_sinalizado.v ff_D.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v somador_completo.v tb_calculo_delta.v valor_absoluto.v 
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module contador_2b_ComPausa
+# -- Compiling module ff_T
+# -- Compiling module controle_load_registradores
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module divisor_8x8_sinalizado
+# -- Compiling module ff_D
+# -- Compiling module multiplicador_8x8
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module mux_2x1
+# -- Compiling module full_adder
+# -- Compiling module mux2
+# -- Compiling module adder8
+# -- Compiling module sub8
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calculo_delta
+# 
+# Top level modules:
+# 	controle_load_registradores
+# 	divisor_8x8_sinalizado
+# 	raiz_Quadrada
+# 	tb_calculo_delta
+# End time: 18:37:29 on Sep 26,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_calculo_delta
+# vsim -voptargs=""+acc"" work.tb_calculo_delta 
+# Start time: 18:37:29 on Sep 26,2026
+# Loading work.tb_calculo_delta
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading sv_std.std
+# Loading work.valor_absoluto
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+add wave -r /*
+run -all
+# ==============================================
+#        TESTE DO CALCULO DO DELTA
+#        Delta = b^2 - 4ac
+# ==============================================
+# Teste 1:
+# a =    1 | b =    5 | c =    6 | delta =       1 | overflow = 0
+# Teste 2:
+# a =    1 | b =    4 | c =    4 | delta =       0 | overflow = 0
+# Teste 3:
+# a =    1 | b =    2 | c =    3 | delta =      -8 | overflow = 0
+# Teste 4:
+# a =    2 | b =   10 | c =    3 | delta =      76 | overflow = 0
+# Teste 5:
+# a =   -2 | b =    5 | c =    3 | delta =      49 | overflow = 0
+# Teste 6:
+# a =    1 | b =   -5 | c =    6 | delta =       1 | overflow = 0
+# Teste 7:
+# a =   -2 | b =   -5 | c =   -3 | delta =       1 | overflow = 0
+# Teste 8:
+# a =    1 | b =  100 | c =    1 | delta =    9996 | overflow = 0
+# Teste 9:
+# a =   10 | b =    2 | c =   10 | delta =    -396 | overflow = 0
+# ==============================================
+#               FIM DOS TESTES
+# ==============================================
+# ** Note: $stop    : tb_calculo_delta.v(185)
+#    Time: 90 ns  Iteration: 0  Instance: /tb_calculo_delta
+# Break in Module tb_calculo_delta at tb_calculo_delta.v line 185
+
+# End time: 18:40:06 on Sep 26,2026, Elapsed time: 0:02:37
+# Errors: 0, Warnings: 8
