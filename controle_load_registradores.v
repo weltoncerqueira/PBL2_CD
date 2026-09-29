@@ -9,28 +9,26 @@ module controle_load_registradores (
     output [7:0] reg_b,
     output [7:0] reg_c,
 	 
-	 output led0, led1, led2, led3, led4, led5, led6, led7, led8
-);
-	
+	 output led0, led1, led2
+	 
+	);
+	 
     wire [1:0] count;
     wire sel_a, sel_b, sel_c;
     wire botao_pulse; 
+	 
+	 wire rst_interno;
+	 not (rst_interno, reset);
 	 
 	 // saida dos leds para teste
 	 assign led0 = sel_a;
 	 assign led1 = sel_b;
 	 assign led2 = sel_c;
-	 assign led3 = 1'b0;
-	 assign led4 = 1'b0;
-	 assign led5 = 1'b0;
-	 assign led6 = 1'b0;
-	 assign led7 = 1'b0;
-	 assign led8 = 1'b0;
 	 
 	 // captura um pulso único do botão
     detector_de_borda borda_1 (
         .clk(clk),
-        .rst(reset),
+        .rst(rst_interno),
         .sinal(botao),
         .pulso(botao_pulse)
     );
@@ -39,7 +37,7 @@ module controle_load_registradores (
     contador_2b contComPausa (
         .pulso(botao_pulse),    
         .clk(clk),
-        .rst(reset),
+        .rst(rst_interno),
         .Q1(count[0]),
 		  .Q2(count[1])
     );
@@ -54,9 +52,9 @@ module controle_load_registradores (
     );
 	 
 	 // registradores
-    registrador_8b reg8_a (.D(sw), .enable(sel_a), .rst(reset), .clk(clk), .S(reg_a));
-    registrador_8b reg8_b (.D(sw), .enable(sel_b), .rst(reset), .clk(clk), .S(reg_b));
-    registrador_8b reg8_c (.D(sw), .enable(sel_c), .rst(reset), .clk(clk), .S(reg_c));
+    registrador_8b reg8_a (.D(sw), .enable(sel_a), .rst(rst_interno), .clk(clk), .S(reg_a));
+    registrador_8b reg8_b (.D(sw), .enable(sel_b), .rst(rst_interno), .clk(clk), .S(reg_b));
+    registrador_8b reg8_c (.D(sw), .enable(sel_c), .rst(rst_interno), .clk(clk), .S(reg_c));
 
 endmodule
 
@@ -110,7 +108,6 @@ endmodule
 
 
 //decoder_abc.v
-//Decodificador para escolher qual dos valores (a, b ou c) devem carregar nos registradores
 module decoder_abc (
     input key_pulse,
     input [1:0] count,
@@ -121,13 +118,13 @@ module decoder_abc (
     not (countN0, count[0]);
     not (countN1, count[1]);
 
-    // sel_a = key_pulse & ~count[1] & ~count[0]   (count = 00)
+    // (count = 00)
     and (sel_a, key_pulse, countN1, countN0);
 
-    // sel_b = key_pulse & ~count[1] & count[0]    (count = 01)
+    // (count = 01)
     and (sel_b, key_pulse, countN1, count[0]);
 
-    // sel_c = key_pulse & count[1] & ~count[0]    (count = 10)
+    // (count = 10)
     and (sel_c, key_pulse, count[1], countN0);
 
     // count = 11 → nenhuma saída ativa (travado), implícito

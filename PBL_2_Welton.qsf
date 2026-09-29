@@ -47,7 +47,6 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
-set_global_assignment -name VERILOG_FILE ff_D.v
 set_global_assignment -name VERILOG_FILE contador_2b.v
 set_global_assignment -name VERILOG_FILE controle_load_registradores.v
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
@@ -61,6 +60,8 @@ set_global_assignment -name VERILOG_FILE mux_2x1.v
 set_global_assignment -name VERILOG_FILE raiz_Quadrada.v
 set_global_assignment -name VERILOG_FILE divisor_8x8_sinalizado.v
 set_global_assignment -name VERILOG_FILE calculo_delta.v
+set_global_assignment -name VERILOG_FILE valor_absoluto_8b.v
+set_global_assignment -name VERILOG_FILE teste_reg.v
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
