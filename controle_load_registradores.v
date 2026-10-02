@@ -5,25 +5,20 @@ module controle_load_registradores (
     input        botao,     
     input  [7:0] sw,      
 
-    output [7:0] reg_a,
-    output [7:0] reg_b,
-    output [7:0] reg_c,
+    //output [7:0] reg_a,
+    //output [7:0] reg_b,
+    //output [7:0] reg_c,
 	 
-	 output led0, led1, led2
+	 output sel_a, sel_b, sel_c
 	 
 	);
 	 
+	 wire [7:0] reg_a, reg_b, reg_c;
     wire [1:0] count;
-    wire sel_a, sel_b, sel_c;
     wire botao_pulse; 
 	 
 	 wire rst_interno;
 	 not (rst_interno, reset);
-	 
-	 // saida dos leds para teste
-	 assign led0 = sel_a;
-	 assign led1 = sel_b;
-	 assign led2 = sel_c;
 	 
 	 // captura um pulso único do botão
     detector_de_borda borda_1 (
@@ -44,7 +39,6 @@ module controle_load_registradores (
 	 
 	 // Decodifica o contador para escolher qual registrador receberá o valor das chaves
     decoder_abc abc (
-        .key_pulse(botao_pulse),
         .count(count), 
         .sel_a(sel_a), 
         .sel_b(sel_b), 
@@ -109,7 +103,6 @@ endmodule
 
 //decoder_abc.v
 module decoder_abc (
-    input key_pulse,
     input [1:0] count,
     output sel_a, sel_b, sel_c
 );
@@ -119,13 +112,13 @@ module decoder_abc (
     not (countN1, count[1]);
 
     // (count = 00)
-    and (sel_a, key_pulse, countN1, countN0);
+    and (sel_a, countN1, countN0);
 
     // (count = 01)
-    and (sel_b, key_pulse, countN1, count[0]);
+    and (sel_b, countN1, count[0]);
 
     // (count = 10)
-    and (sel_c, key_pulse, count[1], countN0);
+    and (sel_c, count[1], countN0);
 
     // count = 11 → nenhuma saída ativa (travado), implícito
 endmodule
