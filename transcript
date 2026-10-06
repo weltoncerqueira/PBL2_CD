@@ -1,0 +1,134 @@
+# Compile of calcula_x2.sv was successful.
+# Compile of divisor_9bits.sv was successful.
+# Compile of tb_calcula_y.sv was successful.
+# Compile of bcd_to_7seg.v was successful.
+# Compile of bin_pra_decimal.v was successful.
+# Compile of calcula_x1.v was successful.
+# Compile of calcula_y.v was successful.
+# Compile of calculo_delta.v was successful.
+# Compile of complementoDe2_8bits.v was successful.
+# Compile of contador_2b.v was successful.
+# Compile of controle_load_registradores.v was successful.
+# Compile of divisor_9x9_sinalizado.v was successful.
+# Compile of multiplicador_8x8.v was successful.
+# Compile of multiplicador_8x8_sinalizado.v was successful.
+# Compile of multiplicador_16x8.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of raiz_Quadrada.v was successful.
+# Compile of seletor_xy.v was successful.
+# Compile of somador_completo.v was successful.
+# Compile of tb_calcula_x1.v was successful.
+# Compile of tb_calcula_x2.v was successful.
+# 21 compiles, 0 failed with no errors.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 09:32:30 on Oct 05,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v controle_load_registradores.v divisor_9x9_sinalizado.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module controle_load_registradores
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# 
+# Top level modules:
+# 	bcd_to_7seg
+# 	bin_pra_decimal
+# 	calcula_y
+# 	calculo_delta
+# 	controle_load_registradores
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# End time: 09:32:31 on Oct 05,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_calcula_y
+# vsim -voptargs=""+acc"" work.tb_calcula_y 
+# Start time: 09:32:32 on Oct 05,2026
+# Loading sv_std.std
+# Loading work.tb_calcula_y
+# Loading work.calcula_y
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+add wave -r /*
+run -all
+# ----------------------------------------------------------------------------------
+# Iniciando Testbench para calcula_y (y = a*x^2 + b*x + c)
+# ----------------------------------------------------------------------------------
+# Tempo=0t | a=   2 b=   3 c=   5 x=   4 | y_obtido=       49 (0x000031) | cout=0 ovf=0
+#   [OK] Resultado correto:        49
+# Tempo=10t | a=   3 b=   2 c=  10 x=  -5 | y_obtido=       75 (0x00004b) | cout=0 ovf=0
+#   [OK] Resultado correto:        75
+# Tempo=20t | a=  -2 b=  -4 c=  20 x=   3 | y_obtido=      -10 (0xfffff6) | cout=0 ovf=0
+#   [OK] Resultado correto:       -10
+# Tempo=30t | a=  -1 b=  -2 c=  -5 x=  -3 | y_obtido=       -8 (0xfffff8) | cout=1 ovf=0
+#   [OK] Resultado correto:        -8
+# Tempo=40t | a=   5 b=  -7 c= -12 x=   0 | y_obtido=      -12 (0xfffff4) | cout=0 ovf=0
+#   [OK] Resultado correto:       -12
+# Tempo=50t | a= 127 b= 127 c= 127 x=   2 | y_obtido=      889 (0x000379) | cout=0 ovf=0
+#   [OK] Resultado correto:       889
+# Tempo=60t | a=-128 b=-128 c=-128 x=   2 | y_obtido=     -896 (0xfffc80) | cout=1 ovf=0
+#   [OK] Resultado correto:      -896
+# ----------------------------------------------------------------------------------
+# Testes finalizados com sucesso!
+# ----------------------------------------------------------------------------------
+# ** Note: $finish    : B:/altera/PBL2_CD/tb_calcula_y.sv(85)
+#    Time: 70 ns  Iteration: 0  Instance: /tb_calcula_y
+# 1
+# Break in Module tb_calcula_y at B:/altera/PBL2_CD/tb_calcula_y.sv line 85
+
+# End time: 10:14:09 on Oct 05,2026, Elapsed time: 0:41:37
+# Errors: 0, Warnings: 5

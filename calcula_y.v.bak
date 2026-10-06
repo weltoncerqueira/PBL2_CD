@@ -1,0 +1,95 @@
+
+module calcula_y (
+    input [7:0] x,
+	 input [7:0] a
+	 input [7:0] b
+	 input [7:0] c
+    output overflow
+	 output y
+);
+
+    // --- Sinais internos ---
+    wire [15:0] x_quadrado;
+    wire [15:0] cinco_x;
+    wire [15:0] soma1;
+    wire [15:0] soma2;
+
+    wire cout1, cout2;
+    wire ov1, ov2;
+
+    // Multiplicação x²
+    multiplicador_8x8_sinalizado multp1 (
+        .A(x),
+        .B(x),
+        .S(x_quadrado)
+    );
+
+    // Multiplicação (-5)*x
+    multiplicador_8x8_sinalizado multp2 (
+        .A(x),
+        .B(8'hFB), // -5 em complemento de 2
+        .S(cinco_x)
+    );
+
+    // Soma x² + (-5x)
+    somador_16bits somador1 (
+        .a(x_quadrado),
+        .b(cinco_x),
+        .cin(1'b0),
+        .sum(soma1),
+        .cout(cout1),
+        .overflow(ov1)
+    );
+
+    // Soma +6
+    somador_16bits somador2 (
+        .a(soma1),
+        .b(16'd6),
+        .cin(1'b0),
+        .sum(soma2),
+        .cout(cout2),
+        .overflow(ov2)
+    );
+
+    // Seleção de display
+    wire erro__chaves_11;
+    seletor_hexa_dec_to7seg segmentos7 (
+        .somaFinal(soma2),
+        .sel(sel_hex_dec),
+        .display4(display4),
+        .display3(display3),
+        .display2(display2),
+        .display1(display1),
+        .display0(display0),
+        .erro(erro__chaves_11)
+    );
+
+    // overflow = ov1 | ov2
+    or (overflow, ov1, ov2);
+
+    // cout = cout2 & ~overflow
+    wire n_overflow;
+    not (n_overflow, overflow);
+    and (cout, cout2, n_overflow);
+
+    // zero = 1 quando soma2 == 0 (NOR de todos os bits)
+    nor (zero,
+        soma2[0],  soma2[1],  soma2[2],  soma2[3],
+        soma2[4],  soma2[5],  soma2[6],  soma2[7],
+        soma2[8],  soma2[9],  soma2[10], soma2[11],
+        soma2[12], soma2[13], soma2[14], soma2[15]
+    );
+
+    // erro vindo do seletor
+    buf (erro, erro__chaves_11);
+	 
+	 
+	 //Saida de outros leds (Sempre apagado)
+	 buf (led4, 1'b0);
+	 buf (led5, 1'b0);
+	 buf (led6, 1'b0);
+	 buf (led7, 1'b0);
+	 buf (led8, 1'b0);
+	 buf (led9, 1'b0);
+
+endmodule

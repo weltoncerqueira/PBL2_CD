@@ -1,0 +1,7 @@
+
+module integrador(
+	input [] sw;
+	input [] sel
+);
+
+endmodule 

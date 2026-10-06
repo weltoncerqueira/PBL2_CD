@@ -1,0 +1,334 @@
+
+module integrador (
+	input [7:0] sw,
+	input [1:0] sel,
+	input botao,
+	input clk,
+	input reset,
+	
+	// Saídas dos 5 displays de 7 segmentos
+   output [6:0] disp4,  // Dez Milhar
+   output [6:0] disp3,  // Milhar
+   output [6:0] disp2,  // Centena
+   output [6:0] disp1,  // Dezena
+   output [6:0] disp0   // Unidade
+	
+);
+
+	wire [7:0] reg_a, reg_b, reg_c;
+	wire [1:0] count1, count2;
+	
+	
+	wire sel_a, sel_b, sel_c;
+   wire botao_pulse; 
+	 
+	wire rst_interno;
+	not (rst_interno, reset);
+	
+	 
+	// captura um pulso único do botão
+   detector_de_borda borda_1 (
+       .clk(clk),
+       .rst(rst_interno),
+       .sinal(botao),
+       .pulso(botao_pulse)
+    );
+
+	// Conta até 3, com base em cada pulso do botao
+   contador_2b contComPausa (
+        .pulso(botao_pulse),    
+        .clk(clk),
+        .rst(rst_interno),
+        .Q(count1),
+		  .S(count2)
+    );
+	 
+	 // Decodifica o contador para escolher qual registrador receberá o valor das chaves
+    decoder_abc abc (
+        .count(count1), 
+        .sel_a(sel_a), 
+        .sel_b(sel_b), 
+        .sel_c(sel_c)
+    );
+	 
+	 // registradores
+    registrador_8b reg8_a (.D(sw), .enable(sel_a), .rst(rst_interno), .clk(clk), .S(reg_a));
+    registrador_8b reg8_b (.D(sw), .enable(sel_b), .rst(rst_interno), .clk(clk), .S(reg_b));
+    registrador_8b reg8_c (.D(sw), .enable(sel_c), .rst(rst_interno), .clk(clk), .S(reg_c));
+	 
+	 // Sinais BCD
+    wire [3:0] dez_milhar1, milhar1, centena1, dezena1, unidade1;
+    wire [3:0] dez_milhar2, milhar2, centena2, dezena2, unidade2;
+    wire [3:0] dez_milhar3, milhar3, centena3, dezena3, unidade3;
+
+    // --- Conversão BINÁRIO para DECIMAL ---    
+    bin_pra_decimal bin_dec_1 (.valor_bin(reg_a), .dez_milhar(dez_milhar1), .milhar(milhar1), .centena(centena1), .dezena(dezena1), .unidade(unidade1));
+    bin_pra_decimal bin_dec_2 (.valor_bin(reg_b), .dez_milhar(dez_milhar2), .milhar(milhar2), .centena(centena2), .dezena(dezena2), .unidade(unidade2));
+    bin_pra_decimal bin_dec_3 (.valor_bin(reg_c), .dez_milhar(dez_milhar3), .milhar(milhar3), .centena(centena3), .dezena(dezena3), .unidade(unidade3));
+
+    // Vetores de 7 bits para cada dígito decodificado
+    wire [6:0] seg4_a, seg3_a, seg2_a, seg1_a, seg0_a;
+    wire [6:0] seg4_b, seg3_b, seg2_b, seg1_b, seg0_b;
+    wire [6:0] seg4_c, seg3_c, seg2_c, seg1_c, seg0_c;
+
+    // --- Decodificação BCD para 7 Segmentos de REG_A ---
+    bcd_to_7seg bcd_a4 ( .bcd(dez_milhar1), .seg(seg4_a) );
+    bcd_to_7seg bcd_a3 ( .bcd(milhar1),     .seg(seg3_a) );
+    bcd_to_7seg bcd_a2 ( .bcd(centena1),    .seg(seg2_a) );
+    bcd_to_7seg bcd_a1 ( .bcd(dezena1),     .seg(seg1_a) );
+    bcd_to_7seg bcd_a0 ( .bcd(unidade1),    .seg(seg0_a) );
+
+    // --- Decodificação BCD para 7 Segmentos de REG_B ---
+    bcd_to_7seg bcd_b4 ( .bcd(dez_milhar2), .seg(seg4_b) );
+    bcd_to_7seg bcd_b3 ( .bcd(milhar2),     .seg(seg3_b) );
+    bcd_to_7seg bcd_b2 ( .bcd(centena2),    .seg(seg2_b) );
+    bcd_to_7seg bcd_b1 ( .bcd(dezena2),     .seg(seg1_b) );
+    bcd_to_7seg bcd_b0 ( .bcd(unidade2),    .seg(seg0_b) );
+
+    // --- Decodificação BCD para 7 Segmentos de REG_C ---
+    bcd_to_7seg bcd_c4 ( .bcd(dez_milhar3), .seg(seg4_c) );
+    bcd_to_7seg bcd_c3 ( .bcd(milhar3),     .seg(seg3_c) );
+    bcd_to_7seg bcd_c2 ( .bcd(centena3),    .seg(seg2_c) );
+    bcd_to_7seg bcd_c1 ( .bcd(dezena3),     .seg(seg1_c) );
+    bcd_to_7seg bcd_c0 ( .bcd(unidade3),    .seg(seg0_c) );
+	 
+	 // --- SELETOR (MULTIPLEXADOR) ---
+	 
+	 mux4to1_7bit mux_disp4 ( .in_a(seg4_a), .in_b(seg4_b), .in_c(seg4_c), .sel(sel), .out(disp4) );
+    mux4to1_7bit mux_disp3 ( .in_a(seg3_a), .in_b(seg3_b), .in_c(seg3_c), .sel(sel), .out(disp3) );
+    mux4to1_7bit mux_disp2 ( .in_a(seg2_a), .in_b(seg2_b), .in_c(seg2_c), .sel(sel), .out(disp2) );
+    mux4to1_7bit mux_disp1 ( .in_a(seg1_a), .in_b(seg1_b), .in_c(seg1_c), .sel(sel), .out(disp1) );
+    mux4to1_7bit mux_disp0 ( .in_a(seg0_a), .in_b(seg0_b), .in_c(seg0_c), .sel(sel), .out(disp0) );
+	 
+	
+	 /*
+	 wire [17:0] delta;
+	 wire [8:0] x1, x2;
+	 wire ovf_x1, ovf_x2;
+	 wire ovf_delta, ovf_y, cout_Y, y;
+	 wire delta_negativo1, delta_negativo2;
+	
+	 calculo_delta delta (
+		.a(reg_a),
+		.b(reg_b),
+		.c(reg_c),
+		.delta(delta),
+		.overflow(ovf_delta)
+	 );
+	
+	 calcula_x1 x1 (
+      .a(reg_a), 
+      .b(reg_b),
+      .delta(delta),
+      .x1(x1),
+      .ov_soma(ovf_x1), 
+      .delta_negativo(delta_negativo1)
+	 );
+	
+	 calcula_x2  x2 (
+      .a(reg_a), 
+      .b(reg_b),
+      .delta(delta),
+      .x1(x2),
+      .ov_soma(ovf_x2), 
+      .delta_negativo(delta_negativo2)
+	 );
+	 
+	 
+	 //Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
+	 wire delta_negativo;
+	 or (delta_negativo, delta_negativo1, delta_negativo2);
+	 
+	 // fzr modulo pra Aumentar o tamanho de (sw, x1, x2) para 24 bits
+	 
+	 calcula_y y (
+		.x(sw),
+		.a(reg_a),
+		.b(reg_b),
+		.c(reg_c),
+		.overflow(ovf_y),
+		.cout(cout_Y),
+		.y(y)
+	);
+	 
+	 seletor_xy xy_sel(
+		.x1(x1), 
+		.x2(x2), 
+		.x(sw), 
+		.y(y),
+		.sel(sel),
+		.s(mostra)
+	 );
+	*/
+	
+endmodule 
+
+
+// Mux 4:1 estrutural genérico de 7 bits
+module mux4to1_7bit (
+    input  [6:0] in_a,
+    input  [6:0] in_b,
+    input  [6:0] in_c,
+    input  [1:0] sel,
+    output [6:0] out
+);
+    // Para cada um dos 7 segmentos, faz a combinação lógica estrutural do MUX 4:1:
+    // sel = 00 -> in_a
+    // sel = 01 -> in_b
+    // sel = 10 ou 11 -> in_c
+    
+    genvar i;
+    generate
+        for (i = 0; i < 7; i = i + 1) begin : gen_mux
+            wire not_sel1, not_sel0;
+            wire term_a, term_b, term_c1, term_c2;
+
+            not (not_sel1, sel[1]);
+            not (not_sel0, sel[0]);
+
+            // mintermos para seleção:
+            // sel == 00 -> in_a
+            and (term_a, in_a[i], not_sel1, not_sel0);
+            
+            // sel == 01 -> in_b
+            and (term_b, in_b[i], not_sel1, sel[0]);
+            
+            // sel == 10 -> in_c
+            and (term_c1, in_c[i], sel[1], not_sel0);
+            
+            // sel == 11 -> in_c
+            and (term_c2, in_c[i], sel[1], sel[0]);
+
+            // Saída = OU dos mintermos
+            or (out[i], term_a, term_b, term_c1, term_c2);
+        end
+    endgenerate
+endmodule
+
+
+
+//registrador_8b.v
+module registrador_8b (
+    input        clk,
+    input        rst,
+    input        enable,
+    input  [7:0] D,
+    output [7:0] S
+);
+
+    wire [7:0] mux_out;
+    wire [7:0] Q;
+
+    mux_2x1 MUX0 (.A(Q[0]), .B(D[0]), .S(enable), .Y(mux_out[0]));
+    ff_D     FF0  (.D(mux_out[0]), .clk(clk), .reset(rst), .Q(Q[0]));
+
+    mux_2x1 MUX1 (.A(Q[1]), .B(D[1]), .S(enable), .Y(mux_out[1]));
+    ff_D     FF1  (.D(mux_out[1]), .clk(clk), .reset(rst), .Q(Q[1]));
+
+    mux_2x1 MUX2 (.A(Q[2]), .B(D[2]), .S(enable), .Y(mux_out[2]));
+    ff_D     FF2  (.D(mux_out[2]), .clk(clk), .reset(rst), .Q(Q[2]));
+
+    mux_2x1 MUX3 (.A(Q[3]), .B(D[3]), .S(enable), .Y(mux_out[3]));
+    ff_D     FF3  (.D(mux_out[3]), .clk(clk), .reset(rst), .Q(Q[3]));
+
+    mux_2x1 MUX4 (.A(Q[4]), .B(D[4]), .S(enable), .Y(mux_out[4]));
+    ff_D     FF4  (.D(mux_out[4]), .clk(clk), .reset(rst), .Q(Q[4]));
+
+    mux_2x1 MUX5 (.A(Q[5]), .B(D[5]), .S(enable), .Y(mux_out[5]));
+    ff_D     FF5  (.D(mux_out[5]), .clk(clk), .reset(rst), .Q(Q[5]));
+
+    mux_2x1 MUX6 (.A(Q[6]), .B(D[6]), .S(enable), .Y(mux_out[6]));
+    ff_D     FF6  (.D(mux_out[6]), .clk(clk), .reset(rst), .Q(Q[6]));
+
+    mux_2x1 MUX7 (.A(Q[7]), .B(D[7]), .S(enable), .Y(mux_out[7]));
+    ff_D     FF7  (.D(mux_out[7]), .clk(clk), .reset(rst), .Q(Q[7]));
+
+    buf (S[0], Q[0]);
+	 buf (S[1], Q[1]);
+	 buf (S[2], Q[2]);
+	 buf (S[3], Q[3]);
+	 buf (S[4], Q[4]);
+	 buf (S[5], Q[5]);
+	 buf (S[6], Q[6]);
+	 buf (S[7], Q[7]);
+	 
+endmodule
+
+
+//decoder_abc.v
+module decoder_abc (
+    input [1:0] count,
+    output sel_a, sel_b, sel_c
+);
+    wire countN0, countN1;
+
+    not (countN0, count[0]);
+    not (countN1, count[1]);
+
+    // (count = 00)
+    and (sel_a, countN1, countN0);
+
+    // (count = 01)
+    and (sel_b, countN1, count[0]);
+
+    // (count = 10)
+    and (sel_c, count[1], countN0);
+
+    // count = 11 → nenhuma saída ativa (travado), implícito
+endmodule
+
+
+// Módulo: detector_de_borda
+module detector_de_borda (
+    input  clk,
+    input  rst,
+    input  sinal,   // 1 = solto, 0 = pressionado (convenção KEY da DE10-Lite)
+    output pulso
+);
+
+    wire Q1, Q2, Q1N;
+
+    ff_D FF_Detector1 (
+        .D(sinal),
+        .clk(clk),
+        .reset(rst),
+		  .Q(Q1)
+    );
+
+    ff_D FF_Detector2 (
+        .D(Q1),
+        .clk(clk),
+        .reset(rst),
+		  .Q(Q2)
+    );
+	 
+	 not (Q1N, Q1);
+	 and (pulso, Q1N, Q2);
+	
+	 
+endmodule
+
+
+// FPGA projects using Verilog/ VHDL 
+// fpga4student.com
+// Verilog code for D Flip FLop
+// Verilog code for Rising edge D flip flop with Asynchronous Reset high
+module ff_D(D, clk, reset, Q);
+input D; 
+input clk;  
+input reset; 
+output reg Q; 
+
+	always @(posedge clk) 
+	  begin
+        if (reset)
+            Q <= 1'b0;
+        else
+            Q <= D;
+     end
+	  
+endmodule
+
+
+
+

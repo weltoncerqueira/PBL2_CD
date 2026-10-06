@@ -1,0 +1,367 @@
+
+module somador_16bits (
+    input  [15:0] A,
+    input  [15:0] B,
+    input         cin,
+    output [15:0] S,
+    output        cout
+);
+    wire [14:0] c;
+
+    somador_completo fa0  (.A(A[0]),  .B(B[0]),  .cin(cin),  .S(S[0]),  .cout(c[0]));
+    somador_completo fa1  (.A(A[1]),  .B(B[1]),  .cin(c[0]), .S(S[1]),  .cout(c[1]));
+    somador_completo fa2  (.A(A[2]),  .B(B[2]),  .cin(c[1]), .S(S[2]),  .cout(c[2]));
+    somador_completo fa3  (.A(A[3]),  .B(B[3]),  .cin(c[2]), .S(S[3]),  .cout(c[3]));
+    somador_completo fa4  (.A(A[4]),  .B(B[4]),  .cin(c[3]), .S(S[4]),  .cout(c[4]));
+    somador_completo fa5  (.A(A[5]),  .B(B[5]),  .cin(c[4]), .S(S[5]),  .cout(c[5]));
+    somador_completo fa6  (.A(A[6]),  .B(B[6]),  .cin(c[5]), .S(S[6]),  .cout(c[6]));
+    somador_completo fa7  (.A(A[7]),  .B(B[7]),  .cin(c[6]), .S(S[7]),  .cout(c[7]));
+    somador_completo fa8  (.A(A[8]),  .B(B[8]),  .cin(c[7]), .S(S[8]),  .cout(c[8]));
+    somador_completo fa9  (.A(A[9]),  .B(B[9]),  .cin(c[8]), .S(S[9]),  .cout(c[9]));
+    somador_completo fa10 (.A(A[10]), .B(B[10]), .cin(c[9]), .S(S[10]), .cout(c[10]));
+    somador_completo fa11 (.A(A[11]), .B(B[11]), .cin(c[10]),.S(S[11]), .cout(c[11]));
+    somador_completo fa12 (.A(A[12]), .B(B[12]), .cin(c[11]),.S(S[12]), .cout(c[12]));
+    somador_completo fa13 (.A(A[13]), .B(B[13]), .cin(c[12]),.S(S[13]), .cout(c[13]));
+    somador_completo fa14 (.A(A[14]), .B(B[14]), .cin(c[13]),.S(S[14]), .cout(c[14]));
+    somador_completo fa15 (.A(A[15]), .B(B[15]), .cin(c[14]),.S(S[15]), .cout(cout));
+endmodule
+
+
+module produtos_parciais_16x8 (
+    input  [15:0] A,
+    input  [7:0]  B,
+    output [15:0] pp0, pp1, pp2, pp3, pp4, pp5, pp6, pp7
+);
+    // Linha 0 (B[0])
+    and (pp0[0],  A[0],  B[0]);
+    and (pp0[1],  A[1],  B[0]);
+    and (pp0[2],  A[2],  B[0]);
+    and (pp0[3],  A[3],  B[0]);
+    and (pp0[4],  A[4],  B[0]);
+    and (pp0[5],  A[5],  B[0]);
+    and (pp0[6],  A[6],  B[0]);
+    and (pp0[7],  A[7],  B[0]);
+    and (pp0[8],  A[8],  B[0]);
+    and (pp0[9],  A[9],  B[0]);
+    and (pp0[10], A[10], B[0]);
+    and (pp0[11], A[11], B[0]);
+    and (pp0[12], A[12], B[0]);
+    and (pp0[13], A[13], B[0]);
+    and (pp0[14], A[14], B[0]);
+    and (pp0[15], A[15], B[0]);
+
+    // Linha 1 (B[1])
+    and (pp1[0],  A[0],  B[1]);
+    and (pp1[1],  A[1],  B[1]);
+    and (pp1[2],  A[2],  B[1]);
+    and (pp1[3],  A[3],  B[1]);
+    and (pp1[4],  A[4],  B[1]);
+    and (pp1[5],  A[5],  B[1]);
+    and (pp1[6],  A[6],  B[1]);
+    and (pp1[7],  A[7],  B[1]);
+    and (pp1[8],  A[8],  B[1]);
+    and (pp1[9],  A[9],  B[1]);
+    and (pp1[10], A[10], B[1]);
+    and (pp1[11], A[11], B[1]);
+    and (pp1[12], A[12], B[1]);
+    and (pp1[13], A[13], B[1]);
+    and (pp1[14], A[14], B[1]);
+    and (pp1[15], A[15], B[1]);
+
+    // Linha 2 (B[2])
+    and (pp2[0],  A[0],  B[2]);
+    and (pp2[1],  A[1],  B[2]);
+    and (pp2[2],  A[2],  B[2]);
+    and (pp2[3],  A[3],  B[2]);
+    and (pp2[4],  A[4],  B[2]);
+    and (pp2[5],  A[5],  B[2]);
+    and (pp2[6],  A[6],  B[2]);
+    and (pp2[7],  A[7],  B[2]);
+    and (pp2[8],  A[8],  B[2]);
+    and (pp2[9],  A[9],  B[2]);
+    and (pp2[10], A[10], B[2]);
+    and (pp2[11], A[11], B[2]);
+    and (pp2[12], A[12], B[2]);
+    and (pp2[13], A[13], B[2]);
+    and (pp2[14], A[14], B[2]);
+    and (pp2[15], A[15], B[2]);
+
+    // Linha 3 (B[3])
+    and (pp3[0],  A[0],  B[3]);
+    and (pp3[1],  A[1],  B[3]);
+    and (pp3[2],  A[2],  B[3]);
+    and (pp3[3],  A[3],  B[3]);
+    and (pp3[4],  A[4],  B[3]);
+    and (pp3[5],  A[5],  B[3]);
+    and (pp3[6],  A[6],  B[3]);
+    and (pp3[7],  A[7],  B[3]);
+    and (pp3[8],  A[8],  B[3]);
+    and (pp3[9],  A[9],  B[3]);
+    and (pp3[10], A[10], B[3]);
+    and (pp3[11], A[11], B[3]);
+    and (pp3[12], A[12], B[3]);
+    and (pp3[13], A[13], B[3]);
+    and (pp3[14], A[14], B[3]);
+    and (pp3[15], A[15], B[3]);
+
+    // Linha 4 (B[4])
+    and (pp4[0],  A[0],  B[4]);
+    and (pp4[1],  A[1],  B[4]);
+    and (pp4[2],  A[2],  B[4]);
+    and (pp4[3],  A[3],  B[4]);
+    and (pp4[4],  A[4],  B[4]);
+    and (pp4[5],  A[5],  B[4]);
+    and (pp4[6],  A[6],  B[4]);
+    and (pp4[7],  A[7],  B[4]);
+    and (pp4[8],  A[8],  B[4]);
+    and (pp4[9],  A[9],  B[4]);
+    and (pp4[10], A[10], B[4]);
+    and (pp4[11], A[11], B[4]);
+    and (pp4[12], A[12], B[4]);
+    and (pp4[13], A[13], B[4]);
+    and (pp4[14], A[14], B[4]);
+    and (pp4[15], A[15], B[4]);
+
+    // Linha 5 (B[5])
+    and (pp5[0],  A[0],  B[5]);
+    and (pp5[1],  A[1],  B[5]);
+    and (pp5[2],  A[2],  B[5]);
+    and (pp5[3],  A[3],  B[5]);
+    and (pp5[4],  A[4],  B[5]);
+    and (pp5[5],  A[5],  B[5]);
+    and (pp5[6],  A[6],  B[5]);
+    and (pp5[7],  A[7],  B[5]);
+    and (pp5[8],  A[8],  B[5]);
+    and (pp5[9],  A[9],  B[5]);
+    and (pp5[10], A[10], B[5]);
+    and (pp5[11], A[11], B[5]);
+    and (pp5[12], A[12], B[5]);
+    and (pp5[13], A[13], B[5]);
+    and (pp5[14], A[14], B[5]);
+    and (pp5[15], A[15], B[5]);
+
+    // Linha 6 (B[6])
+    and (pp6[0],  A[0],  B[6]);
+    and (pp6[1],  A[1],  B[6]);
+    and (pp6[2],  A[2],  B[6]);
+    and (pp6[3],  A[3],  B[6]);
+    and (pp6[4],  A[4],  B[6]);
+    and (pp6[5],  A[5],  B[6]);
+    and (pp6[6],  A[6],  B[6]);
+    and (pp6[7],  A[7],  B[6]);
+    and (pp6[8],  A[8],  B[6]);
+    and (pp6[9],  A[9],  B[6]);
+    and (pp6[10], A[10], B[6]);
+    and (pp6[11], A[11], B[6]);
+    and (pp6[12], A[12], B[6]);
+    and (pp6[13], A[13], B[6]);
+    and (pp6[14], A[14], B[6]);
+    and (pp6[15], A[15], B[6]);
+
+    // Linha 7 (B[7])
+    and (pp7[0],  A[0],  B[7]);
+    and (pp7[1],  A[1],  B[7]);
+    and (pp7[2],  A[2],  B[7]);
+    and (pp7[3],  A[3],  B[7]);
+    and (pp7[4],  A[4],  B[7]);
+    and (pp7[5],  A[5],  B[7]);
+    and (pp7[6],  A[6],  B[7]); // Corrigido A[6]
+    and (pp7[7],  A[7],  B[7]);
+    and (pp7[8],  A[8],  B[7]);
+    and (pp7[9],  A[9],  B[7]);
+    and (pp7[10], A[10], B[7]);
+    and (pp7[11], A[11], B[7]);
+    and (pp7[12], A[12], B[7]);
+    and (pp7[13], A[13], B[7]);
+    and (pp7[14], A[14], B[7]);
+    and (pp7[15], A[15], B[7]);
+endmodule
+
+
+
+
+module multiplicador_16x8 (
+    input  [15:0] A,
+    input  [7:0]  B,
+    output [23:0] P
+);
+    wire [15:0] pp0, pp1, pp2, pp3, pp4, pp5, pp6, pp7;
+
+    // Instanciação 100% estrutural das 128 portas AND
+    produtos_parciais_16x8 gen_pp (
+        .A(A),
+        .B(B),
+        .pp0(pp0), .pp1(pp1), .pp2(pp2), .pp3(pp3),
+        .pp4(pp4), .pp5(pp5), .pp6(pp6), .pp7(pp7)
+    );
+
+    // Conexão do bit 0 do produto
+    buf (P[0], pp0[0]);
+
+    // Árvore/Cadeia de Somadores (somador_16bits já é 100% estrutural)
+    wire [15:0] sum1, sum2, sum3, sum4, sum5, sum6, sum7;
+    wire c1, c2, c3, c4, c5, c6, c7;
+
+    somador_16bits add1 (.A({1'b0, pp0[15:1]}), .B(pp1), .cin(1'b0), .S(sum1), .cout(c1));
+    buf (P[1], sum1[0]);
+
+    somador_16bits add2 (.A({c1, sum1[15:1]}),   .B(pp2), .cin(1'b0), .S(sum2), .cout(c2));
+    buf (P[2], sum2[0]);
+
+    somador_16bits add3 (.A({c2, sum2[15:1]}),   .B(pp3), .cin(1'b0), .S(sum3), .cout(c3));
+    buf (P[3], sum3[0]);
+
+	 somador_16bits add4 (.A({c3, sum3[15:1]}), .B(pp4), .cin(1'b0), .S(sum4), .cout(c4));
+    buf (P[4], sum4[0]);
+
+    somador_16bits add5 (.A({c4, sum4[15:1]}),   .B(pp5), .cin(1'b0), .S(sum5), .cout(c5)); 
+    buf (P[5], sum5[0]);
+
+    somador_16bits add6 (.A({c5, sum5[15:1]}),   .B(pp6), .cin(1'b0), .S(sum6), .cout(c6));
+    buf (P[6], sum6[0]);
+
+    somador_16bits add7 (.A({c6, sum6[15:1]}),   .B(pp7), .cin(1'b0), .S(sum7), .cout(c7));
+
+    buf (P[7],  sum7[0]);
+    buf (P[8],  sum7[1]);
+    buf (P[9],  sum7[2]);
+    buf (P[10], sum7[3]);
+    buf (P[11], sum7[4]);
+    buf (P[12], sum7[5]);
+    buf (P[13], sum7[6]);
+    buf (P[14], sum7[7]);
+    buf (P[15], sum7[8]);
+    buf (P[16], sum7[9]);
+    buf (P[17], sum7[10]);
+    buf (P[18], sum7[11]);
+    buf (P[19], sum7[12]);
+    buf (P[20], sum7[13]);
+    buf (P[21], sum7[14]);
+    buf (P[22], sum7[15]);
+    buf (P[23], c7);
+
+endmodule
+
+
+
+module numero_Final_16b (
+    input  [15:0] entrada,
+    output [15:0] valor_absoluto
+);
+
+    wire [15:0] entrada_xor;
+    wire cout_inutil;
+
+    // Se entrada[15] == 1, inverte os bits (A XOR 1 = ~A)
+    // Se entrada[15] == 0, mantêm os bits (A XOR 0 = A)
+    xor (entrada_xor[0],  entrada[0],  entrada[15]);
+    xor (entrada_xor[1],  entrada[1],  entrada[15]);
+    xor (entrada_xor[2],  entrada[2],  entrada[15]);
+    xor (entrada_xor[3],  entrada[3],  entrada[15]);
+    xor (entrada_xor[4],  entrada[4],  entrada[15]);
+    xor (entrada_xor[5],  entrada[5],  entrada[15]);
+    xor (entrada_xor[6],  entrada[6],  entrada[15]);
+    xor (entrada_xor[7],  entrada[7],  entrada[15]);
+    xor (entrada_xor[8],  entrada[8],  entrada[15]);
+    xor (entrada_xor[9],  entrada[9],  entrada[15]);
+    xor (entrada_xor[10], entrada[10], entrada[15]);
+    xor (entrada_xor[11], entrada[11], entrada[15]);
+    xor (entrada_xor[12], entrada[12], entrada[15]);
+    xor (entrada_xor[13], entrada[13], entrada[15]);
+    xor (entrada_xor[14], entrada[14], entrada[15]);
+    xor (entrada_xor[15], entrada[15], entrada[15]);
+
+    // Soma 1 caso seja negativo (cin = entrada[15]) ou 0 caso seja positivo
+    somador_16bits add_abs (
+        .A(entrada_xor),
+        .B(16'b0),
+        .cin(entrada[15]),
+        .S(valor_absoluto),
+        .cout(cout_inutil)
+    );
+
+endmodule
+
+
+module complementoDe2_24bits (
+    input  [23:0] A,
+    input         bs, // Bit de sinal (1 = aplica C2, 0 = mantém)
+    output [23:0] out
+);
+
+    wire [23:0] A_xor;
+    wire cout_inutil, ovf_inutil;
+
+    // Inversão condicional controlada por bs
+    xor (A_xor[0],  A[0],  bs);
+    xor (A_xor[1],  A[1],  bs);
+    xor (A_xor[2],  A[2],  bs);
+    xor (A_xor[3],  A[3],  bs);
+    xor (A_xor[4],  A[4],  bs);
+    xor (A_xor[5],  A[5],  bs);
+    xor (A_xor[6],  A[6],  bs);
+    xor (A_xor[7],  A[7],  bs);
+    xor (A_xor[8],  A[8],  bs);
+    xor (A_xor[9],  A[9],  bs);
+    xor (A_xor[10], A[10], bs);
+    xor (A_xor[11], A[11], bs);
+    xor (A_xor[12], A[12], bs);
+    xor (A_xor[13], A[13], bs);
+    xor (A_xor[14], A[14], bs);
+    xor (A_xor[15], A[15], bs);
+    xor (A_xor[16], A[16], bs);
+    xor (A_xor[17], A[17], bs);
+    xor (A_xor[18], A[18], bs);
+    xor (A_xor[19], A[19], bs);
+    xor (A_xor[20], A[20], bs);
+    xor (A_xor[21], A[21], bs);
+    xor (A_xor[22], A[22], bs);
+    xor (A_xor[23], A[23], bs);
+
+    // Soma 'bs' para concluir o C2 (se bs=1 soma 1, se bs=0 soma 0)
+    somador_24b add_c2 (
+        .A(A_xor),
+        .B(24'b0),
+        .cin(bs),
+        .S(out),
+        .cout(cout_inutil),
+        .overflow(ovf_inutil)
+    );
+
+endmodule
+
+
+
+module multiplicador_16x8_sinalizado (
+    input  wire [15:0] A,
+    input  wire [7:0]  B,
+    output wire [23:0] P
+);
+
+    wire [15:0] A_final;
+    wire [7:0]  B_final;
+    wire [23:0] P_mag;
+    wire sinal;
+
+    // Sinais iguais = 0 (positivo), Sinais diferentes = 1 (negativo)
+    xor (sinal, A[15], B[7]);
+
+    // Converte os operandos para seus respectivos valores absolutos (módulos)
+    numero_Final_16b num1 (.entrada(A), .valor_absoluto(A_final));
+    numero_Final_8b  num2 (.entrada(B), .valor_absoluto(B_final));
+
+    // Multiplicação sem sinal dos módulos (16x8 -> 24 bits)
+    multiplicador_16x8 mul_u (
+        .A(A_final),
+        .B(B_final),
+        .P(P_mag)
+    );
+
+    // Converte o produto de volta para complemento de 2 se o sinal for negativo
+    complementoDe2_24bits comp24 (
+        .A(P_mag),
+        .bs(sinal),
+        .out(P)
+    );
+
+endmodule
