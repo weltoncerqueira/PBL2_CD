@@ -6,14 +6,14 @@ module integrador (
     input reset,
  
     output [6:0] s0, s1, s2, s3, s4, s5,
-	 output sinal_x1, sinal_x2, sinal_y, sinal_x
+	 output sinal_negativo,
+	 output sel_a, sel_b, sel_c
     
 );
 
     wire [7:0] reg_a, reg_b, reg_c;
     wire [1:0] count;
-    
-    wire sel_a, sel_b, sel_c;
+	 
     wire botao_pulse; 
      
     wire rst_interno;
@@ -58,14 +58,7 @@ module integrador (
      wire delta_negativo1, delta_negativo2;
 	  wire [23:0] shift_x1, shift_x2, shift_x;
 	  wire [23:0] x_saida, x1_saida, x2_saida, y_saida;
-	 
-	 
-	  //captura os sinais para a flag de número negativo
-	  and (sinal_x1, x1[8], 1'b1);
-	  and (sinal_x2, x2[8], 1'b1);
-	  and (sinal_y, y[23], 1'b1);
-	  and (sinal_x, sw[7], 1'b1);
-	 
+
      calculo_delta delta1 (
         .a(reg_a),
         .b(reg_b),
@@ -103,7 +96,16 @@ module integrador (
        .y(y)
     );
 	 
-	
+	  //captura os sinais de número negativo e acende o led
+	  verifica_sinal sinal1(
+		  .sel(sel),
+		  .x1(x1), 
+		  .x2(x2), 
+		  .y(y), 
+		  .x(sw),
+		  .sinal_negativo(sinal_negativo)
+		);
+	 
      //Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
 	  //Dá pra fazer usando mux que seleciona entre o x1 e x2 normal ou zerado
 	  //a depender do valor de delta_negativo
@@ -125,28 +127,28 @@ module integrador (
 	  //complemento de dois do y
 	  complementoDe2_24bits comple24b_y(
 			 .A(y),
-			 .bs(sinal_y),
+			 .bs(y[23]),
 			.out(y_saida)
 		);
 		
 	  //complemento de dois do x1
 	  complementoDe2_24bits comple24b_x1(
 			 .A(shift_x1),
-			 .bs(sinal_x1),
+			 .bs(x1[8]),
 			.out(x1_saida)
 		);
 		
 	  //complemento de dois do x2
 	  complementoDe2_24bits comple24b_x2(
 			 .A(shift_x2),
-			 .bs(sinal_x2),
+			 .bs(x2[8]),
 			.out(x2_saida)
 		);
 		
 	  //complemento de dois do x2
 	  complementoDe2_24bits comple24b_x(
 			 .A(shift_x),
-			 .bs(sinal_x),
+			 .bs(sw[7]),
 			.out(x_saida)
 		);		
 		
@@ -248,6 +250,41 @@ module integrador (
 	 
 endmodule
 
+
+module verifica_sinal (
+	input [1:0] sel,
+	input [8:0] x1, x2, 
+	input [23:0] y, 
+	input [7:0] x,
+	output sinal_negativo
+);
+
+	   // seletor 00 = x
+		// seletor 01 = y
+		// seletor 10 = x1        
+		// seletor 11 = x2
+	wire sinal_x1, sinal_x2, sinal_y, sinal_x;
+	
+	wire selN0, selN1;
+
+	not (selN0, sel[0]);
+	not (selN1, sel[1]);
+
+	// sel = 00 → x
+	and (sinal_x, selN1, selN0, x[7]);
+
+  // sel = 01 → y
+	and (sinal_y, selN1, sel[0], y[23]);
+
+	// sel = 10 → x1
+	and (sinal_x1, sel[1], selN0, x1[8]);
+
+	// sel = 11 → x2
+	and (sinal_x2, sel[1], sel[0], x2[8]);
+
+	or (sinal_negativo, sinal_x, sinal_y, sinal_x1, sinal_x2);
+
+endmodule
 
 
 
