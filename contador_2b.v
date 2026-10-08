@@ -3,8 +3,7 @@ module contador_2b (
     input  clk,
     input  rst,
     input  pulso,
-    output [1:0] Q,
-	 output [1:0] S
+    output [1:0] Q
 	 
 );
 
@@ -33,28 +32,6 @@ module contador_2b (
         .rst(rst),
         .q(Q[1])
     );
-	 
-
-	wire habilita_sel, TS1;
-	
-	// só conta depois de carregar a,b,c
-	and (habilita_sel, pulso, parar);   
-
-	ff_T FFS0 (
-		.t(habilita_sel), 
-		.clk(clk), 
-		.rst(rst), 
-		.q(S[0])
-	);
-
-	and (TS1, habilita_sel, S[0]);
-	
-	ff_T FFS1 (
-		.t(TS1), 
-		.clk(clk), 
-		.rst(rst), 
-		.q(S[1])
-	);
 
 endmodule
 

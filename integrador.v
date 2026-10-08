@@ -6,12 +6,12 @@ module integrador (
     input reset,
  
     output [6:0] s0, s1, s2, s3, s4, s5,
-	 output sinal_x1, sinal_x2, sinal_y
+	 output sinal_x1, sinal_x2, sinal_y, sinal_x
     
 );
 
     wire [7:0] reg_a, reg_b, reg_c;
-    wire [1:0] count1, count2;
+    wire [1:0] count;
     
     wire sel_a, sel_b, sel_c;
     wire botao_pulse; 
@@ -33,13 +33,12 @@ module integrador (
         .pulso(botao_pulse),    
         .clk(clk),
         .rst(rst_interno),
-        .Q(count1),
-          .S(count2)
+        .Q(count)
     );
      
      // Decodifica o contador para escolher qual registrador receberá o valor das chaves
     decoder_abc abc (
-        .count(count1), 
+        .count(count), 
         .sel_a(sel_a), 
         .sel_b(sel_b), 
         .sel_c(sel_c)
@@ -65,7 +64,7 @@ module integrador (
 	  and (sinal_x1, x1[8], 1'b1);
 	  and (sinal_x2, x2[8], 1'b1);
 	  and (sinal_y, y[23], 1'b1);
-	  and (sinal_x, x[7], 1'b1);
+	  and (sinal_x, sw[7], 1'b1);
 	 
      calculo_delta delta1 (
         .a(reg_a),
@@ -93,6 +92,7 @@ module integrador (
       .delta_negativo(delta_negativo2)
      );
      
+	  
      calcula_y y1 (
        .x(sw),
        .a(reg_a),
@@ -103,6 +103,7 @@ module integrador (
        .y(y)
     );
 	 
+	
      //Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
 	  //Dá pra fazer usando mux que seleciona entre o x1 e x2 normal ou zerado
 	  //a depender do valor de delta_negativo

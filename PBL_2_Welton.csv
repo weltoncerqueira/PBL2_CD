@@ -1,0 +1,80 @@
+# Copyright (C) 2025  Altera Corporation. All rights reserved.
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, the Altera Quartus Prime License Agreement,
+# the Altera IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Altera and sold by Altera or its authorized distributors.  Please
+# refer to the Altera Software License Subscription Agreements 
+# on the Quartus Prime software download page.
+
+# Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+# File: /home/aluno/PBL2_CD_welton/PBL_2_Welton.csv
+# Generated on: Thu Oct  8 13:51:20 2026
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation
+botao,Input,PIN_B8,7,B7_N0,PIN_M21,,,,,,
+clk,Input,PIN_p11,3,B3_N0,PIN_M8,,,,,,
+reset,Input,PIN_A7,7,B7_N0,PIN_P12,,,,,,
+s0[6],Output,PIN_C14,7,B7_N0,PIN_M15,,,,,,
+s0[5],Output,PIN_E15,7,B7_N0,PIN_A5,,,,,,
+s0[4],Output,PIN_C15,7,B7_N0,PIN_R12,,,,,,
+s0[3],Output,PIN_C16,7,B7_N0,PIN_W11,,,,,,
+s0[2],Output,PIN_E16,7,B7_N0,PIN_B11,,,,,,
+s0[1],Output,PIN_D17,7,B7_N0,PIN_E11,,,,,,
+s0[0],Output,PIN_C17,7,B7_N0,PIN_A6,,,,,,
+s1[6],Output,PIN_C18,7,B7_N0,PIN_Y11,,,,,,
+s1[5],Output,PIN_D18,6,B6_N0,PIN_A9,,,,,,
+s1[4],Output,PIN_E18,6,B6_N0,PIN_J11,,,,,,
+s1[3],Output,PIN_B16,7,B7_N0,PIN_J10,,,,,,
+s1[2],Output,PIN_A17,7,B7_N0,PIN_A7,,,,,,
+s1[1],Output,PIN_A18,7,B7_N0,PIN_Y10,,,,,,
+s1[0],Output,PIN_B17,7,B7_N0,PIN_A8,,,,,,
+s2[6],Output,PIN_B20,6,B6_N0,PIN_D9,,,,,,
+s2[5],Output,PIN_A20,7,B7_N0,PIN_E10,,,,,,
+s2[4],Output,PIN_B19,7,B7_N0,PIN_L15,,,,,,
+s2[3],Output,PIN_A21,6,B6_N0,PIN_C8,,,,,,
+s2[2],Output,PIN_B21,6,B6_N0,PIN_B8,,,,,,
+s2[1],Output,PIN_C22,6,B6_N0,PIN_B7,,,,,,
+s2[0],Output,PIN_B22,6,B6_N0,PIN_B10,,,,,,
+s3[6],Output,PIN_F21,6,B6_N0,PIN_C5,,,,,,
+s3[5],Output,PIN_E22,6,B6_N0,PIN_D7,,,,,,
+s3[4],Output,PIN_E21,6,B6_N0,PIN_C6,,,,,,
+s3[3],Output,PIN_C19,7,B7_N0,PIN_E9,,,,,,
+s3[2],Output,PIN_C20,6,B6_N0,PIN_B3,,,,,,
+s3[1],Output,PIN_D19,6,B6_N0,PIN_A2,,,,,,
+s3[0],Output,PIN_E17,6,B6_N0,PIN_D5,,,,,,
+s4[6],Output,PIN_F18,6,B6_N0,PIN_B1,,,,,,
+s4[5],Output,PIN_E20,6,B6_N0,PIN_D6,,,,,,
+s4[4],Output,PIN_E19,6,B6_N0,PIN_E8,,,,,,
+s4[3],Output,PIN_J18,6,B6_N0,PIN_E6,,,,,,
+s4[2],Output,PIN_H19,6,B6_N0,PIN_C2,,,,,,
+s4[1],Output,PIN_F19,6,B6_N0,PIN_B5,,,,,,
+s4[0],Output,PIN_F20,6,B6_N0,PIN_B2,,,,,,
+s5[6],Output,PIN_J20,6,B6_N0,PIN_J8,,,,,,
+s5[5],Output,PIN_K20,6,B6_N0,PIN_C9,,,,,,
+s5[4],Output,PIN_L18,6,B6_N0,PIN_H11,,,,,,
+s5[3],Output,PIN_N18,6,B6_N0,PIN_A4,,,,,,
+s5[2],Output,PIN_M20,6,B6_N0,PIN_G4,,,,,,
+s5[1],Output,PIN_N19,6,B6_N0,PIN_C7,,,,,,
+s5[0],Output,PIN_N20,6,B6_N0,PIN_D10,,,,,,
+sel[1],Input,PIN_F15,7,B7_N0,PIN_A3,,,,,,
+sel[0],Input,PIN_B14,7,B7_N0,PIN_B4,,,,,,
+sinal_x1,Output,PIN_A8,7,B7_N0,PIN_H12,,,,,,
+sinal_x2,Output,PIN_A9,7,B7_N0,PIN_N14,,,,,,
+sinal_y,Output,PIN_A10,7,B7_N0,PIN_C3,,,,,,
+sw[7],Input,PIN_A14,7,B7_N0,PIN_F7,,,,,,
+sw[6],Input,PIN_A13,7,B7_N0,PIN_G1,,,,,,
+sw[5],Input,PIN_B12,7,B7_N0,PIN_L2,,,,,,
+sw[4],Input,PIN_A12,7,B7_N0,PIN_F1,,,,,,
+sw[3],Input,PIN_C12,7,B7_N0,PIN_C4,,,,,,
+sw[2],Input,PIN_D12,7,B7_N0,PIN_K2,,,,,,
+sw[1],Input,PIN_C11,7,B7_N0,PIN_R11,,,,,,
+sw[0],Input,PIN_C10,7,B7_N0,PIN_D8,,,,,,
