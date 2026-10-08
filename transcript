@@ -8,8 +8,8 @@
 # Compile of calculo_delta.v was successful.
 # Compile of complementoDe2_8bits.v was successful.
 # Compile of contador_2b.v was successful.
-# Compile of controle_load_registradores.v was successful.
 # Compile of divisor_9x9_sinalizado.v was successful.
+# Compile of integrador.v was successful.
 # Compile of multiplicador_8x8.v was successful.
 # Compile of multiplicador_8x8_sinalizado.v was successful.
 # Compile of multiplicador_16x8.v was successful.
@@ -19,11 +19,12 @@
 # Compile of somador_completo.v was successful.
 # Compile of tb_calcula_x1.v was successful.
 # Compile of tb_calcula_x2.v was successful.
-# 21 compiles, 0 failed with no errors.
+# Compile of tb_integrador.v was successful.
+# 22 compiles, 0 failed with no errors.
 vlog *.v
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 09:32:30 on Oct 05,2026
-# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v controle_load_registradores.v divisor_9x9_sinalizado.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v 
+# Start time: 22:00:17 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
 # -- Compiling module bcd_to_7seg
 # -- Compiling module bcd_maior_igual_5
 # -- Compiling module somador_4bits
@@ -38,23 +39,24 @@ vlog *.v
 # -- Compiling module calculo_delta
 # -- Compiling module subtrator_18bits
 # -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
 # -- Compiling module contador_2b
 # -- Compiling module ff_T
-# -- Compiling module controle_load_registradores
-# -- Compiling module registrador_8b
-# -- Compiling module decoder_abc
-# -- Compiling module detector_de_borda
-# -- Compiling module ff_D
 # -- Compiling module divisor_9x9_sinalizado
 # -- Compiling module subtrator
 # -- Compiling module divisor
 # -- Compiling module divisor_9bits
 # -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
 # -- Compiling module somador_16bits
 # -- Compiling module produtos_parciais_16x8
 # -- Compiling module multiplicador_16x8
 # -- Compiling module numero_Final_16b
-# -- Compiling module complementoDe2_24bits
 # -- Compiling module multiplicador_16x8_sinalizado
 # -- Compiling module multiplicador_8x8_sinalizado
 # -- Compiling module numero_Final_8b
@@ -67,28 +69,33 @@ vlog *.v
 # -- Compiling module raiz_Quadrada
 # -- Compiling module seletor_xy
 # -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
 # -- Compiling module somador_completo
 # -- Compiling module meio_somador
 # -- Compiling module tb_calcula_x1
 # -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
 # 
 # Top level modules:
-# 	bcd_to_7seg
-# 	bin_pra_decimal
-# 	calcula_y
-# 	calculo_delta
-# 	controle_load_registradores
 # 	seletor_xy
 # 	tb_calcula_x1
 # 	tb_calcula_x2
-# End time: 09:32:31 on Oct 05,2026, Elapsed time: 0:00:01
+# 	tb_integrador
+# End time: 22:00:18 on Oct 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
-vsim -voptargs="+acc" work.tb_calcula_y
-# vsim -voptargs=""+acc"" work.tb_calcula_y 
-# Start time: 09:32:32 on Oct 05,2026
-# Loading sv_std.std
-# Loading work.tb_calcula_y
-# Loading work.calcula_y
+vsim -voptargs="+acc" work.tb_integrador
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:00:20 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
 # Loading work.multiplicador_8x8_sinalizado
 # Loading work.numero_Final_8b
 # Loading work.complementoDe2_8bits
@@ -96,6 +103,21 @@ vsim -voptargs="+acc" work.tb_calcula_y
 # Loading work.multiplicador_8x8
 # Loading work.meio_somador
 # Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
 # Loading work.multiplicador_16x8_sinalizado
 # Loading work.numero_Final_16b
 # Loading work.somador_16bits
@@ -103,32 +125,1112 @@ vsim -voptargs="+acc" work.tb_calcula_y
 # Loading work.produtos_parciais_16x8
 # Loading work.complementoDe2_24bits
 # Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10128 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
 add wave -r /*
 run -all
-# ----------------------------------------------------------------------------------
-# Iniciando Testbench para calcula_y (y = a*x^2 + b*x + c)
-# ----------------------------------------------------------------------------------
-# Tempo=0t | a=   2 b=   3 c=   5 x=   4 | y_obtido=       49 (0x000031) | cout=0 ovf=0
-#   [OK] Resultado correto:        49
-# Tempo=10t | a=   3 b=   2 c=  10 x=  -5 | y_obtido=       75 (0x00004b) | cout=0 ovf=0
-#   [OK] Resultado correto:        75
-# Tempo=20t | a=  -2 b=  -4 c=  20 x=   3 | y_obtido=      -10 (0xfffff6) | cout=0 ovf=0
-#   [OK] Resultado correto:       -10
-# Tempo=30t | a=  -1 b=  -2 c=  -5 x=  -3 | y_obtido=       -8 (0xfffff8) | cout=1 ovf=0
-#   [OK] Resultado correto:        -8
-# Tempo=40t | a=   5 b=  -7 c= -12 x=   0 | y_obtido=      -12 (0xfffff4) | cout=0 ovf=0
-#   [OK] Resultado correto:       -12
-# Tempo=50t | a= 127 b= 127 c= 127 x=   2 | y_obtido=      889 (0x000379) | cout=0 ovf=0
-#   [OK] Resultado correto:       889
-# Tempo=60t | a=-128 b=-128 c=-128 x=   2 | y_obtido=     -896 (0xfffc80) | cout=1 ovf=0
-#   [OK] Resultado correto:      -896
-# ----------------------------------------------------------------------------------
-# Testes finalizados com sucesso!
-# ----------------------------------------------------------------------------------
-# ** Note: $finish    : B:/altera/PBL2_CD/tb_calcula_y.sv(85)
-#    Time: 70 ns  Iteration: 0  Instance: /tb_calcula_y
+# 
+# ==================================================
+#    INICIANDO GRAVAÇÃO DOS REGS (a, b, c)
+# ==================================================
+# [40000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [140000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [240000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAÍDAS NOS DISPLAYS NOS MUXES
+# ==================================================
+# [340000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [350000 ns] Seletor:      X  (sel=00)
+# Display (s5..s0):       5    
+# ---------------------------------------
+# [360000 ns] Seletor:      Y  (sel=01)
+# Display (s5..s0):            
+# ---------------------------------------
+# [370000 ns] Seletor:      X1 (sel=10)
+# Display (s5..s0):            
+# ---------------------------------------
+# [380000 ns] Seletor:      X2 (sel=11)
+# Display (s5..s0):            
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(131)
+#    Time: 430 ns  Iteration: 0  Instance: /tb_integrador
 # 1
-# Break in Module tb_calcula_y at B:/altera/PBL2_CD/tb_calcula_y.sv line 85
+# Break in Module tb_integrador at tb_integrador.v line 131
 
-# End time: 10:14:09 on Oct 05,2026, Elapsed time: 0:41:37
-# Errors: 0, Warnings: 5
+# Compile of calcula_x2.sv was successful.
+# Compile of divisor_9bits.sv was successful.
+# Compile of tb_calcula_y.sv was successful.
+# Compile of bcd_to_7seg.v was successful.
+# Compile of bin_pra_decimal.v was successful.
+# Compile of calcula_x1.v was successful.
+# Compile of calcula_y.v was successful.
+# Compile of calculo_delta.v was successful.
+# Compile of complementoDe2_8bits.v was successful.
+# Compile of contador_2b.v was successful.
+# Compile of divisor_9x9_sinalizado.v was successful.
+# Compile of integrador.v was successful.
+# Compile of multiplicador_8x8.v was successful.
+# Compile of multiplicador_8x8_sinalizado.v was successful.
+# Compile of multiplicador_16x8.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of raiz_Quadrada.v was successful.
+# Compile of seletor_xy.v was successful.
+# Compile of somador_completo.v was successful.
+# Compile of tb_calcula_x1.v was successful.
+# Compile of tb_calcula_x2.v was successful.
+# Compile of tb_integrador.v was successful.
+# 22 compiles, 0 failed with no errors.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 22:10:08 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
+# 
+# Top level modules:
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# 	tb_integrador
+# End time: 22:10:08 on Oct 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:10:10 on Oct 07,2026, Elapsed time: 0:09:50
+# Errors: 0, Warnings: 7
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:10:10 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAIDAS NOS DISPLAYS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [596000 ns] Seletor:      X  (sel=00)
+# Display (s5..s0):           5
+# ---------------------------------------
+# [616000 ns] Seletor:      Y  (sel=01)
+# Display (s5..s0):            
+# ---------------------------------------
+# [636000 ns] Seletor:      X1 (sel=10)
+# Display (s5..s0):            
+# ---------------------------------------
+# [656000 ns] Seletor:      X2 (sel=11)
+# Display (s5..s0):            
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(141)
+#    Time: 706 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 141
+
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 22:14:07 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
+# 
+# Top level modules:
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# 	tb_integrador
+# End time: 22:14:07 on Oct 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:14:09 on Oct 07,2026, Elapsed time: 0:03:59
+# Errors: 0, Warnings: 2
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:14:09 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAIDAS NOS DISPLAYS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [596000 ns] Seletor:      X  (sel=00)
+# Display (s5..s0):           5
+# ---------------------------------------
+# [616000 ns] Seletor:      Y  (sel=01)
+# Display (s5..s0):            
+# ---------------------------------------
+# [636000 ns] Seletor:      X1 (sel=10)
+# Display (s5..s0):            
+# ---------------------------------------
+# [656000 ns] Seletor:      X2 (sel=11)
+# Display (s5..s0):            
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(141)
+#    Time: 706 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 141
+
+reset =vlog *.v
+# ambiguous command name "reset": resetGlobalEvcd resetTime
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:16:23 on Oct 07,2026, Elapsed time: 0:02:14
+# Errors: 0, Warnings: 2
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:16:23 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAIDAS NOS DISPLAYS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [596000 ns] Seletor:      X  (sel=00)
+# Display (s5..s0):           5
+# ---------------------------------------
+# [616000 ns] Seletor:      Y  (sel=01)
+# Display (s5..s0):            
+# ---------------------------------------
+# [636000 ns] Seletor:      X1 (sel=10)
+# Display (s5..s0):            
+# ---------------------------------------
+# [656000 ns] Seletor:      X2 (sel=11)
+# Display (s5..s0):            
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(141)
+#    Time: 706 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 141
+
+# Compile of tb_integrador.v was successful.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 22:17:15 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
+# 
+# Top level modules:
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# 	tb_integrador
+# End time: 22:17:15 on Oct 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:17:18 on Oct 07,2026, Elapsed time: 0:00:55
+# Errors: 0, Warnings: 3
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:17:18 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAIDAS NOS DISPLAYS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [596000 ns] Seletor:      X  (sel=00)
+# Display (s5..s0):           5
+# ---------------------------------------
+# [616000 ns] Seletor:      Y  (sel=01)
+# Display (s5..s0):            
+# ---------------------------------------
+# [636000 ns] Seletor:      X1 (sel=10)
+# Display (s5..s0):            
+# ---------------------------------------
+# [656000 ns] Seletor:      X2 (sel=11)
+# Display (s5..s0):            
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(141)
+#    Time: 706 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 141
+
+# Compile of calcula_x2.sv was successful.
+# Compile of divisor_9bits.sv was successful.
+# Compile of tb_calcula_y.sv was successful.
+# Compile of bcd_to_7seg.v was successful.
+# Compile of bin_pra_decimal.v was successful.
+# Compile of calcula_x1.v was successful.
+# Compile of calcula_y.v was successful.
+# Compile of calculo_delta.v was successful.
+# Compile of complementoDe2_8bits.v was successful.
+# Compile of contador_2b.v was successful.
+# Compile of divisor_9x9_sinalizado.v was successful.
+# Compile of integrador.v was successful.
+# Compile of multiplicador_8x8.v was successful.
+# Compile of multiplicador_8x8_sinalizado.v was successful.
+# Compile of multiplicador_16x8.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of raiz_Quadrada.v was successful.
+# Compile of seletor_xy.v was successful.
+# Compile of somador_completo.v was successful.
+# Compile of tb_calcula_x1.v was successful.
+# Compile of tb_calcula_x2.v was successful.
+# Compile of tb_integrador.v was successful.
+# 22 compiles, 0 failed with no errors.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 22:22:47 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
+# 
+# Top level modules:
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# 	tb_integrador
+# End time: 22:22:47 on Oct 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:22:49 on Oct 07,2026, Elapsed time: 0:05:31
+# Errors: 0, Warnings: 3
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:22:49 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAIDAS NOS DISPLAYS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [596000 ns] Seletor:      X  (sel=00)
+# Display (s5..s0): ? ? ? ? ? 5
+# ---------------------------------------
+# [616000 ns] Seletor:      Y  (sel=01)
+# Display (s5..s0): ? ? ? ? ? ?
+# ---------------------------------------
+# [636000 ns] Seletor:      X1 (sel=10)
+# Display (s5..s0): ? ? ? ? ? ?
+# ---------------------------------------
+# [656000 ns] Seletor:      X2 (sel=11)
+# Display (s5..s0): ? ? ? ? ? ?
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(142)
+#    Time: 706 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 142
+
+# Compile of calcula_x2.sv was successful.
+# Compile of divisor_9bits.sv was successful.
+# Compile of tb_calcula_y.sv was successful.
+# Compile of bcd_to_7seg.v was successful.
+# Compile of bin_pra_decimal.v was successful.
+# Compile of calcula_x1.v was successful.
+# Compile of calcula_y.v was successful.
+# Compile of calculo_delta.v was successful.
+# Compile of complementoDe2_8bits.v was successful.
+# Compile of contador_2b.v was successful.
+# Compile of divisor_9x9_sinalizado.v was successful.
+# Compile of integrador.v was successful.
+# Compile of multiplicador_8x8.v was successful.
+# Compile of multiplicador_8x8_sinalizado.v was successful.
+# Compile of multiplicador_16x8.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of raiz_Quadrada.v was successful.
+# Compile of seletor_xy.v was successful.
+# Compile of somador_completo.v was successful.
+# Compile of tb_calcula_x1.v was successful.
+# Compile of tb_calcula_x2.v was successful.
+# Compile of tb_integrador.v was successful.
+# 22 compiles, 0 failed with no errors.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 22:30:23 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
+# 
+# Top level modules:
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# 	tb_integrador
+# End time: 22:30:23 on Oct 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:30:27 on Oct 07,2026, Elapsed time: 0:07:38
+# Errors: 0, Warnings: 3
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:30:27 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DAS SAIDAS NOS DISPLAYS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# [596000 ns] Seletor:      X  (sel=00)
+#   Display (s5..s0): ? ? ? ? ? 5
+# ---------------------------------------
+# [616000 ns] Seletor:      Y  (sel=01)
+#   Display (s5..s0): ? ? ? ? ? ?
+# ---------------------------------------
+# [636000 ns] Seletor:      X1 (sel=10)
+#   Display (s5..s0): ? ? ? ? ? ?
+# ---------------------------------------
+# [656000 ns] Seletor:      X2 (sel=11)
+#   Display (s5..s0): ? ? ? ? ? ?
+# ---------------------------------------
+# ** Note: $finish    : tb_integrador.v(141)
+#    Time: 706 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 141
+
+# Compile of tb_integrador.v was successful.
+vlog *.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 22:33:45 on Oct 07,2026
+# vlog -reportprogress 300 bcd_to_7seg.v bin_pra_decimal.v calcula_x1.v calcula_y.v calculo_delta.v complementoDe2_8bits.v contador_2b.v divisor_9x9_sinalizado.v integrador.v multiplicador_16x8.v multiplicador_8x8.v multiplicador_8x8_sinalizado.v mux_2x1.v raiz_Quadrada.v seletor_xy.v somador_completo.v tb_calcula_x1.v tb_calcula_x2.v tb_integrador.v 
+# -- Compiling module bcd_to_7seg
+# -- Compiling module bcd_maior_igual_5
+# -- Compiling module somador_4bits
+# -- Compiling module mux2_1_4bits
+# -- Compiling module ajuste_bcd
+# -- Compiling module double_dabble_stage
+# -- Compiling module bin_pra_decimal
+# -- Compiling module calcula_x1
+# -- Compiling module complementoDe2_9bits
+# -- Compiling module calcula_y
+# -- Compiling module somador_24b
+# -- Compiling module calculo_delta
+# -- Compiling module subtrator_18bits
+# -- Compiling module complementoDe2_8bits
+# -- Compiling module complementoDe2_24bits
+# -- Compiling module contador_2b
+# -- Compiling module ff_T
+# -- Compiling module divisor_9x9_sinalizado
+# -- Compiling module subtrator
+# -- Compiling module divisor
+# -- Compiling module divisor_9bits
+# -- Compiling module numero_Final_9b
+# -- Compiling module integrador
+# -- Compiling module extensao_pra_24bits
+# -- Compiling module registrador_8b
+# -- Compiling module decoder_abc
+# -- Compiling module detector_de_borda
+# -- Compiling module ff_D
+# -- Compiling module somador_16bits
+# -- Compiling module produtos_parciais_16x8
+# -- Compiling module multiplicador_16x8
+# -- Compiling module numero_Final_16b
+# -- Compiling module multiplicador_16x8_sinalizado
+# -- Compiling module multiplicador_8x8_sinalizado
+# -- Compiling module numero_Final_8b
+# -- Compiling module complementoDe2_16bits
+# -- Compiling module multiplicador_8x8
+# -- Compiling module mux_2x1
+# -- Compiling module adder18
+# -- Compiling module sub18
+# -- Compiling module sqrt_stage
+# -- Compiling module raiz_Quadrada
+# -- Compiling module seletor_xy
+# -- Compiling module mux_4x1
+# -- Compiling module mux_4x1_antigo_1bit
+# -- Compiling module somador_completo
+# -- Compiling module meio_somador
+# -- Compiling module tb_calcula_x1
+# -- Compiling module tb_calcula_x2
+# -- Compiling module tb_integrador
+# 
+# Top level modules:
+# 	seletor_xy
+# 	tb_calcula_x1
+# 	tb_calcula_x2
+# 	tb_integrador
+# End time: 22:33:45 on Oct 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs="+acc" work.tb_integrador
+# End time: 22:33:47 on Oct 07,2026, Elapsed time: 0:03:20
+# Errors: 0, Warnings: 3
+# vsim -voptargs=""+acc"" work.tb_integrador 
+# Start time: 22:33:47 on Oct 07,2026
+# Loading work.tb_integrador
+# Loading work.integrador
+# Loading work.detector_de_borda
+# Loading work.ff_D
+# Loading work.contador_2b
+# Loading work.ff_T
+# Loading work.decoder_abc
+# Loading work.registrador_8b
+# Loading work.mux_2x1
+# Loading work.calculo_delta
+# Loading work.multiplicador_8x8_sinalizado
+# Loading work.numero_Final_8b
+# Loading work.complementoDe2_8bits
+# Loading work.somador_completo
+# Loading work.multiplicador_8x8
+# Loading work.meio_somador
+# Loading work.complementoDe2_16bits
+# Loading work.subtrator_18bits
+# Loading work.calcula_x1
+# Loading work.complementoDe2_9bits
+# Loading work.raiz_Quadrada
+# Loading work.sqrt_stage
+# Loading work.adder18
+# Loading work.sub18
+# Loading work.divisor_9x9_sinalizado
+# Loading work.numero_Final_9b
+# Loading work.divisor_9bits
+# Loading work.divisor
+# Loading work.subtrator
+# Loading sv_std.std
+# Loading work.calcula_x2
+# Loading work.calcula_y
+# Loading work.multiplicador_16x8_sinalizado
+# Loading work.numero_Final_16b
+# Loading work.somador_16bits
+# Loading work.multiplicador_16x8
+# Loading work.produtos_parciais_16x8
+# Loading work.complementoDe2_24bits
+# Loading work.somador_24b
+# Loading work.extensao_pra_24bits
+# Loading work.bin_pra_decimal
+# Loading work.double_dabble_stage
+# Loading work.ajuste_bcd
+# Loading work.bcd_maior_igual_5
+# Loading work.somador_4bits
+# Loading work.mux2_1_4bits
+# Loading work.bcd_to_7seg
+# Loading work.mux_4x1
+# ** Warning: Design size of 10154 instances exceeds ModelSim - Intel FPGA Starter Edition recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim - Intel FPGA Edition. Expect performance to be adversely affected.
+add wave -r /*
+run -all
+# 
+# ==================================================
+#    INICIANDO GRAVACAO DOS REGS (a, b, c)
+# ==================================================
+# [145000 ns] Configurando SW para 'a' = -1 (0xFF)
+# [255000 ns] Configurando SW para 'b' = -10 (0xF6)
+# [365000 ns] Configurando SW para 'c' = -3 (0xFD)
+# 
+# ==================================================
+#    LEITURA DOS RESULTADOS BRUTOS
+# ==================================================
+# [475000 ns] Ajustando entrada SW (x) = -2 (0xFE)
+# 
+# ==================================================
+#        VALORES BRUTOS DOS SINAIS INTERNOS
+# ==================================================
+#   [REGISTRADORES DE ENTRADA]
+#     a  =   -1 (HEX: 0xff)
+#     b  =  -10 (HEX: 0xf6)
+#     c  =   -3 (HEX: 0xfd)
+#     x  =   -2 (HEX: 0xfe)
+# --------------------------------------------------
+#   [SAIDAS CALCULADAS]
+#     Delta =      88 (HEX: 0x00058)
+#     Y     =        13 (HEX: 0x00000d)
+#     X1    =   -9 (HEX: 0x1f7)
+#     X2    =    0 (HEX: 0x000)
+# ==================================================
+# 
+# ** Note: $finish    : tb_integrador.v(111)
+#    Time: 626 ns  Iteration: 0  Instance: /tb_integrador
+# 1
+# Break in Module tb_integrador at tb_integrador.v line 111
+

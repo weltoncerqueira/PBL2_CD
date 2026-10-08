@@ -4,7 +4,8 @@ module calcula_x2 (
     input  [7:0]  b,
     input  [17:0] delta,
     output [8:0]  x2,
-    output        overflow
+    output        overflow,
+	 output        delta_negativo
 );
 
     // x2 = (−b - √Δ) / (2a)
@@ -12,7 +13,6 @@ module calcula_x2 (
     wire [8:0] raiz, b9, raiz_neg, b_neg9;
 
     // Verifica se delta é menor que zero
-    wire delta_negativo;
     buf (delta_negativo, delta[17]);
 
     // Aumentando o tamanho do b para 9 bits (extensão de sinal)

@@ -50,7 +50,6 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name VERILOG_FILE contador_2b.v
-set_global_assignment -name VERILOG_FILE controle_load_registradores.v
 set_global_assignment -name VERILOG_FILE somador_completo.v
 set_global_assignment -name VERILOG_FILE complementoDe2_8bits.v
 set_global_assignment -name VERILOG_FILE multiplicador_8x8_sinalizado.v
@@ -71,4 +70,5 @@ set_global_assignment -name VERILOG_FILE integrador.v
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VERILOG_FILE tb_integrador.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

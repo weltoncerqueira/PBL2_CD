@@ -1,0 +1,144 @@
+`timescale 1ns / 1ps
+
+module tb_integrador;
+
+    // Sinais de Entrada (Regs)
+    reg [7:0] sw;
+    reg [1:0] sel;
+    reg botao;
+    reg clk;
+    reg reset;
+
+    // Sinais de Saída (Wires)
+    wire [6:0] s0, s1, s2, s3, s4, s5;
+
+    // Instância do Módulo Top-Level
+    integrador uut (
+        .sw(sw),
+        .sel(sel),
+        .botao(botao),
+        .clk(clk),
+        .reset(reset),
+        .s0(s0), .s1(s1), .s2(s2), .s3(s3), .s4(s4), .s5(s5)
+    );
+
+    // Geração do Clock (Período = 10ns -> 100MHz)
+    always #5 clk = ~clk;
+
+    // -------------------------------------------------------------
+    // Função Auxiliar para converter a codificação 7-segmentos (Anodo Comum)
+    // 0 = aceso, 1 = apagado
+    // -------------------------------------------------------------
+    function [7:0] seg2char(input [6:0] seg);
+        case (seg)
+            7'b100_0000: seg2char = "0";
+            7'b111_1001: seg2char = "1";
+            7'b010_0100: seg2char = "2";
+            7'b011_0000: seg2char = "3";
+            7'b001_1001: seg2char = "4";
+            7'b001_0010: seg2char = "5";
+            7'b000_0010: seg2char = "6";
+            7'b111_1000: seg2char = "7";
+            7'b000_0000: seg2char = "8";
+            7'b001_0000: seg2char = "9";
+            7'b011_1111: seg2char = "-"; // Traço para valores negativos
+            7'b111_1111: seg2char = " "; // Display desligado/vazio
+            default:     seg2char = "?"; // Valor numérico/segmento não mapeado
+        endcase
+    endfunction
+
+    // Task sincronizada com o clock para simular o clique do botão
+    task pulsar_botao;
+        begin
+            @(posedge clk);
+            #1;
+            botao = 1'b0; // Pressiona o botão (ativo em LOW)
+            repeat (5) @(posedge clk);
+            #1;
+            botao = 1'b1; // Solta o botão
+            repeat (5) @(posedge clk);
+        end
+    endtask
+
+    // Task única para exibir a leitura dos displays no terminal
+    task exibir_displays;
+        input [127:0] nome_seletor;
+        begin
+            #1;
+            $display("[%0t ns] Seletor: %s", $time, nome_seletor);
+            $display("  Display (s5..s0): %c %c %c %c %c %c",
+                     seg2char(s5), seg2char(s4), seg2char(s3),
+                     seg2char(s2), seg2char(s1), seg2char(s0));
+            $display("---------------------------------------");
+        end
+    endtask
+
+    // Processo Estímulo Principal
+    initial begin
+        // 1. Inicialização dos Sinais
+        clk   = 0;
+        reset = 0; // Active-Low: 0 = reseta na FPGA
+        botao = 1; // Botão Solto
+        sw    = 8'h00;
+        sel   = 2'b00;
+
+        // Mantém reset por 10 ciclos de clock
+        repeat (10) @(posedge clk);
+        reset = 1; // Libera o Reset (1 = funcionamento normal)
+        repeat (5)  @(posedge clk);
+
+        $display("\n==================================================");
+        $display("   INICIANDO GRAVACAO DOS REGS (a, b, c)");
+        $display("==================================================");
+
+        // 2. Grava 'a' = -1 (8'hFF em Compl. de 2)
+        sw = 8'd255;
+        $display("[%0t ns] Configurando SW para 'a' = -1 (0xFF)", $time);
+        pulsar_botao();
+
+        // 3. Grava 'b' = -10 (8'hF6 em Compl. de 2)
+        sw = 8'd246;
+        $display("[%0t ns] Configurando SW para 'b' = -10 (0xF6)", $time);
+        pulsar_botao();
+
+        // 4. Grava 'c' = -3 (8'hFD em Compl. de 2)
+        sw = 8'd253;
+        $display("[%0t ns] Configurando SW para 'c' = -3 (0xFD)", $time);
+        pulsar_botao();
+
+        $display("\n==================================================");
+        $display("   LEITURA DAS SAIDAS NOS DISPLAYS");
+        $display("==================================================");
+
+        // Define x = -2 (8'hFE em Compl. de 2)
+        sw = 8'd254;
+        $display("[%0t ns] Ajustando entrada SW (x) = -2 (0xFE)\n", $time);
+        
+        // Aguarda a propagação dos cálculos combinacionais
+        repeat (10) @(posedge clk);
+
+        // Leitura de X (sel = 00)
+        sel = 2'b00;
+        repeat (2) @(posedge clk);
+        exibir_displays("X  (sel=00)");
+
+        // Leitura de Y (sel = 01)
+        sel = 2'b01;
+        repeat (2) @(posedge clk);
+        exibir_displays("Y  (sel=01)");
+
+        // Leitura de X1 (sel = 10)
+        sel = 2'b10;
+        repeat (2) @(posedge clk);
+        exibir_displays("X1 (sel=10)");
+
+        // Leitura de X2 (sel = 11)
+        sel = 2'b11;
+        repeat (2) @(posedge clk);
+        exibir_displays("X2 (sel=11)");
+
+        #50;
+        $finish;
+    end
+
+endmodule

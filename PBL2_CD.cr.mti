@@ -1,4 +1,11 @@
-B:/altera/PBL2_CD/mux_2x1.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/mux_2x1.v
+B:/altera/PBL2_CD/tb_integrador.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_integrador.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module tb_integrador
+
+Top level modules:
+	tb_integrador
+
+} {} {}} B:/altera/PBL2_CD/mux_2x1.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/mux_2x1.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module mux_2x1
 
@@ -31,6 +38,16 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 
 Top level modules:
 	contador_2b
+
+} {} {}} B:/altera/PBL2_CD/seletor_xy.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/seletor_xy.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module seletor_xy
+-- Compiling module mux_4x1
+-- Compiling module mux_4x1_antigo_1bit
+
+Top level modules:
+	seletor_xy
+	mux_4x1
 
 } {} {}} B:/altera/PBL2_CD/divisor_9x9_sinalizado.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/divisor_9x9_sinalizado.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -76,9 +93,14 @@ Top level modules:
 } {} {}} B:/altera/PBL2_CD/complementoDe2_8bits.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/complementoDe2_8bits.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module complementoDe2_8bits
+-- Compiling module complementoDe2_24bits
 
 Top level modules:
 	complementoDe2_8bits
+	complementoDe2_24bits
+
+} {} {}} B:/altera/PBL2_CD/multiplicador_8x8.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/multiplicador_8x8.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 
 } {} {}} B:/altera/PBL2_CD/bcd_to_7seg.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/bcd_to_7seg.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -87,15 +109,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	bcd_to_7seg
 
-} {} {}} B:/altera/PBL2_CD/multiplicador_8x8.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/multiplicador_8x8.v
+} {} {}} B:/altera/PBL2_CD/tb_calculo_delta.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_calculo_delta.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-
-} {} {}} B:/altera/PBL2_CD/detector_de_borda.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/detector_de_borda.v
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module detector_de_borda
+-- Compiling module tb_calculo_delta
 
 Top level modules:
-	detector_de_borda
+	tb_calculo_delta
 
 } {} {}} B:/altera/PBL2_CD/bin_pra_decimal.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/bin_pra_decimal.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -109,19 +128,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	bin_pra_decimal
 
-} {} {}} B:/altera/PBL2_CD/tb_calculo_delta.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_calculo_delta.v
+} {} {}} B:/altera/PBL2_CD/detector_de_borda.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/detector_de_borda.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module tb_calculo_delta
+-- Compiling module detector_de_borda
 
 Top level modules:
-	tb_calculo_delta
-
-} {} {}} B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module tb_contador_2b_ComPausa
-
-Top level modules:
-	tb_contador_2b_ComPausa
+	detector_de_borda
 
 } {} {}} B:/altera/PBL2_CD/tb_calcula_x1.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_calcula_x1.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -130,12 +142,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	tb_calcula_x1
 
-} {} {}} B:/altera/PBL2_CD/decoder_abc.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/decoder_abc.v
+} {} {}} B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_contador_2b_ComPausa.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module decoder_abc
+-- Compiling module tb_contador_2b_ComPausa
 
 Top level modules:
-	decoder_abc
+	tb_contador_2b_ComPausa
 
 } {} {}} B:/altera/PBL2_CD/tb_calcula_x2.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_calcula_x2.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -143,6 +155,23 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 
 Top level modules:
 	tb_calcula_x2
+
+} {} {}} B:/altera/PBL2_CD/decoder_abc.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/decoder_abc.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module decoder_abc
+
+Top level modules:
+	decoder_abc
+
+} {} {}} B:/altera/PBL2_CD/valor_absoluto.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/valor_absoluto.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+
+} {} {}} B:/altera/PBL2_CD/registrador_8b_tb.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/registrador_8b_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module registrador_8b_tb
+
+Top level modules:
+	registrador_8b_tb
 
 } {} {}} B:/altera/PBL2_CD/calculo_delta.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/calculo_delta.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -152,22 +181,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	calculo_delta
 
-} {} {}} B:/altera/PBL2_CD/registrador_8b_tb.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/registrador_8b_tb.v
+} {} {}} B:/altera/PBL2_CD/tb_raiz_Quadrada.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_raiz_Quadrada.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module registrador_8b_tb
+-- Compiling module tb_raiz_Quadrada
 
 Top level modules:
-	registrador_8b_tb
-
-} {} {}} B:/altera/PBL2_CD/valor_absoluto.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/valor_absoluto.v
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-
-} {} {}} B:/altera/PBL2_CD/tb_calcula_y.sv {1 {vlog -work work -sv -stats=none B:/altera/PBL2_CD/tb_calcula_y.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module tb_calcula_y
-
-Top level modules:
-	tb_calcula_y
+	tb_raiz_Quadrada
 
 } {} {}} B:/altera/PBL2_CD/multiplicador_8x8_sinalizado.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/multiplicador_8x8_sinalizado.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -179,12 +198,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	multiplicador_8x8_sinalizado
 
-} {} {}} B:/altera/PBL2_CD/tb_raiz_Quadrada.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/tb_raiz_Quadrada.v
+} {} {}} B:/altera/PBL2_CD/tb_calcula_y.sv {1 {vlog -work work -sv -stats=none B:/altera/PBL2_CD/tb_calcula_y.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module tb_raiz_Quadrada
+-- Compiling module tb_calcula_y
 
 Top level modules:
-	tb_raiz_Quadrada
+	tb_calcula_y
 
 } {} {}} B:/altera/PBL2_CD/multiplicador_16x8.v {1 {vlog -work work -stats=none B:/altera/PBL2_CD/multiplicador_16x8.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -192,7 +211,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 -- Compiling module produtos_parciais_16x8
 -- Compiling module multiplicador_16x8
 -- Compiling module numero_Final_16b
--- Compiling module complementoDe2_24bits
 -- Compiling module multiplicador_16x8_sinalizado
 
 Top level modules:

@@ -5,16 +5,16 @@ module integrador (
     input clk,
     input reset,
  
-   output [6:0] seg5_y, seg4_y, seg3_y, seg2_y, seg1_y, seg0_y
+    output [6:0] s0, s1, s2, s3, s4, s5,
+	 output sinal_x1, sinal_x2, sinal_y
     
 );
 
     wire [7:0] reg_a, reg_b, reg_c;
     wire [1:0] count1, count2;
     
-    
     wire sel_a, sel_b, sel_c;
-   wire botao_pulse; 
+    wire botao_pulse; 
      
     wire rst_interno;
     not (rst_interno, reset);
@@ -57,7 +57,16 @@ module integrador (
      wire ovf_x1, ovf_x2;
      wire ovf_delta, ovf_y, cout_Y;
      wire delta_negativo1, delta_negativo2;
-    
+	  wire [23:0] shift_x1, shift_x2, shift_x;
+	  wire [23:0] x_saida, x1_saida, x2_saida, y_saida;
+	 
+	 
+	  //captura os sinais para a flag de número negativo
+	  and (sinal_x1, x1[8], 1'b1);
+	  and (sinal_x2, x2[8], 1'b1);
+	  and (sinal_y, y[23], 1'b1);
+	  and (sinal_x, x[7], 1'b1);
+	 
      calculo_delta delta1 (
         .a(reg_a),
         .b(reg_b),
@@ -80,128 +89,120 @@ module integrador (
       .b(reg_b),
       .delta(delta),
       .x2(x2),
-      //.ov_soma(ovf_x2), 
-      //.delta_negativo(delta_negativo2)
+      .overflow(ovf_x2), 
+      .delta_negativo(delta_negativo2)
      );
      
-     
-     //Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
-     wire delta_negativo;
-     or (delta_negativo, delta_negativo1, delta_negativo2);
-     // fzr modulo pra Aumentar o tamanho de (sw, x1, x2) para 24 bits
-     
      calcula_y y1 (
-        .x(sw),
-        .a(reg_a),
-        .b(reg_b),
-        .c(reg_c),
-        .overflow(ovf_y),
-        .cout(cout_Y),
-        .y(y)
+       .x(sw),
+       .a(reg_a),
+       .b(reg_b),
+       .c(reg_c),
+       .overflow(ovf_y),
+       .cout(cout_Y),
+       .y(y)
     );
 	 
-	  
-    
-        wire [23:0] shift_x1, shift_x2, shift_x, y_saida;
-        
-        buf (shift_x1[0], x1[0]);
-        buf (shift_x1[1], x1[1]);
-        buf (shift_x1[2], x1[2]);
-        buf (shift_x1[3], x1[3]);
-        buf (shift_x1[4], x1[4]);
-        buf (shift_x1[5], x1[5]);
-        buf (shift_x1[6], x1[6]);
-        buf (shift_x1[7], x1[7]);
-        buf (shift_x1[8], x1[8]);
-        buf (shift_x1[9], x1[8]);
-        buf (shift_x1[10], x1[8]);
-        buf (shift_x1[11], x1[8]);
-        buf (shift_x1[12], x1[8]);
-        buf (shift_x1[13], x1[8]);
-        buf (shift_x1[14], x1[8]);
-        buf (shift_x1[15], x1[8]);
-        buf (shift_x1[16], x1[8]);
-        buf (shift_x1[17], x1[8]);
-        buf (shift_x1[18], x1[8]);
-        buf (shift_x1[19], x1[8]);
-        buf (shift_x1[20], x1[8]);
-        buf (shift_x1[21], x1[8]);
-        buf (shift_x1[22], x1[8]);
-        buf (shift_x1[23], x1[8]);
-        
-        buf (shift_x2[0], x2[0]);
-        buf (shift_x2[1], x2[1]);
-        buf (shift_x2[2], x2[2]);
-        buf (shift_x2[3], x2[3]);
-        buf (shift_x2[4], x2[4]);
-        buf (shift_x2[5], x2[5]);
-        buf (shift_x2[6], x2[6]);
-        buf (shift_x2[7], x2[7]);
-        buf (shift_x2[8], x2[8]);
-        buf (shift_x2[9], x2[8]);
-        buf (shift_x2[10], x2[8]);
-        buf (shift_x2[11], x2[8]);
-        buf (shift_x2[12], x2[8]);
-        buf (shift_x2[13], x2[8]);
-        buf (shift_x2[14], x2[8]);
-        buf (shift_x2[15], x2[8]);
-        buf (shift_x2[16], x2[8]);
-        buf (shift_x2[17], x2[8]);
-        buf (shift_x2[18], x2[8]);
-        buf (shift_x2[19], x2[8]);
-        buf (shift_x2[20], x2[8]);
-        buf (shift_x2[21], x2[8]);
-        buf (shift_x2[22], x2[8]);
-        buf (shift_x2[23], x2[8]);
-        
-        buf (shift_x[0], sw[0]);
-        buf (shift_x[1], sw[1]);
-        buf (shift_x[2], sw[2]);
-        buf (shift_x[3], sw[3]);
-        buf (shift_x[4], sw[4]);
-        buf (shift_x[5], sw[5]);
-        buf (shift_x[6], sw[6]);
-        buf (shift_x[7], sw[7]);
-        buf (shift_x[8], sw[7]);
-        buf (shift_x[9], sw[7]);
-        buf (shift_x[10], sw[7]);
-        buf (shift_x[11], sw[7]);
-        buf (shift_x[12], sw[7]);
-        buf (shift_x[13], sw[7]);
-        buf (shift_x[14], sw[7]);
-        buf (shift_x[15], sw[7]);
-        buf (shift_x[16], sw[7]);
-        buf (shift_x[17], sw[7]);
-        buf (shift_x[18], sw[7]);
-        buf (shift_x[19], sw[7]);
-        buf (shift_x[20], sw[7]);
-        buf (shift_x[21], sw[7]);
-        buf (shift_x[22], sw[7]);
-        buf (shift_x[23], sw[7]);
+     //Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
+	  //Dá pra fazer usando mux que seleciona entre o x1 e x2 normal ou zerado
+	  //a depender do valor de delta_negativo
+     wire delta_negativo;
+     or (delta_negativo, delta_negativo1, delta_negativo2);
 		
-		  complementoDe2_24bits_novo (
-				 .A(y),
-				 .bs(y[23]),
-				.out(y_saida)
-			);
-        
-        wire [3:0] cem_milhar_x, dez_milhar_x, milhar_x, centena_x, dezena_x, unidade_x;
-        wire [3:0] cem_milhar_x1, dez_milhar_x1, milhar_x1, centena_x1, dezena_x1, unidade_x1;
-        wire [3:0] cem_milhar_x2, dez_milhar_x2, milhar_x2, centena_x2, dezena_x2, unidade_x2;
-        wire [3:0] cem_milhar_y, dez_milhar_y, milhar_y, centena_y, dezena_y, unidade_y;
+	
+	  //Extensão das variaveis x1, x2 e x para 24 bits
+	  extensao_pra_24bits extende(
+		  .sw(sw), 
+		  .x1(x1), 
+		  .x2(x2),
+		  .shift_x(shift_x),
+		  .shift_x1(shift_x1), 
+		  .shift_x2(shift_x2)
+	  );
+		
+		
+	  //complemento de dois do y
+	  complementoDe2_24bits comple24b_y(
+			 .A(y),
+			 .bs(sinal_y),
+			.out(y_saida)
+		);
+		
+	  //complemento de dois do x1
+	  complementoDe2_24bits comple24b_x1(
+			 .A(shift_x1),
+			 .bs(sinal_x1),
+			.out(x1_saida)
+		);
+		
+	  //complemento de dois do x2
+	  complementoDe2_24bits comple24b_x2(
+			 .A(shift_x2),
+			 .bs(sinal_x2),
+			.out(x2_saida)
+		);
+		
+	  //complemento de dois do x2
+	  complementoDe2_24bits comple24b_x(
+			 .A(shift_x),
+			 .bs(sinal_x),
+			.out(x_saida)
+		);		
+		
+	  
+	  wire [3:0] cem_milhar_x, dez_milhar_x, milhar_x, centena_x, dezena_x, unidade_x;
+	  wire [3:0] cem_milhar_x1, dez_milhar_x1, milhar_x1, centena_x1, dezena_x1, unidade_x1;
+	  wire [3:0] cem_milhar_x2, dez_milhar_x2, milhar_x2, centena_x2, dezena_x2, unidade_x2;
+	  wire [3:0] cem_milhar_y, dez_milhar_y, milhar_y, centena_y, dezena_y, unidade_y;
 
-        bin_pra_decimal bin_dec_1 (.valor_bin(shift_x), .dez_milhar(dez_milhar_x), .milhar(milhar_x), .centena(centena_x), .dezena(dezena_x), .unidade(unidade_x));
-        bin_pra_decimal bin_dec_2 (.valor_bin(shift_x1), .dez_milhar(dez_milhar_x1), .milhar(milhar_x1), .centena(centena_x1), .dezena(dezena_x1), .unidade(unidade_x1));
-        bin_pra_decimal bin_dec_3 (.valor_bin(y_saida), .dez_milhar(dez_milhar_y), .milhar(milhar_y), .centena(centena_y), .dezena(dezena_y), .unidade(unidade_y));
-        bin_pra_decimal bin_dec_4 (.valor_bin(shift_x2), .dez_milhar(dez_milhar_x2), .milhar(milhar_x2), .centena(centena_x2), .dezena(dezena_x2), .unidade(unidade_x2));
-        
-      //wire [6:0] seg4_x, seg3_x, seg2_x, seg1_x, seg0_x;
-     // wire [6:0] seg5_x1, seg4_x1, seg3_x1, seg2_x1, seg1_x1, seg0_x1;
-       // wire [6:0] seg5_x2, seg4_x2, seg3_x2, seg2_x2, seg1_x2, seg0_x2;
-        //wire [6:0] seg5_y, seg4_y, seg3_y, seg2_y, seg1_y, seg0_y;
-        
+	  bin_pra_decimal bin_dec_1 (
+		  .valor_bin(x_saida), 
+		  .centena_milhar(cem_milhar_x),
+		  .dez_milhar(dez_milhar_x), 
+		  .milhar(milhar_x), 
+		  .centena(centena_x), 
+		  .dezena(dezena_x), 
+		  .unidade(unidade_x)
+	  );
+	  
+	  bin_pra_decimal bin_dec_2 (
+		  .valor_bin(x1_saida), 
+		  .centena_milhar(cem_milhar_x1),
+		  .dez_milhar(dez_milhar_x1), 
+		  .milhar(milhar_x1), 
+		  .centena(centena_x1), 
+		  .dezena(dezena_x1), 
+		  .unidade(unidade_x1)
+	  );
+	  
+	  bin_pra_decimal bin_dec_4 (
+		  .valor_bin(x2_saida),
+		  .centena_milhar(cem_milhar_x2), 
+		  .dez_milhar(dez_milhar_x2), 
+		  .milhar(milhar_x2), 
+		  .centena(centena_x2), 
+		  .dezena(dezena_x2), 
+		  .unidade(unidade_x2)
+	  );
+	  
+	  bin_pra_decimal bin_dec_3 (
+		  .valor_bin(y_saida),
+	     .centena_milhar(cem_milhar_y), 
+		  .dez_milhar(dez_milhar_y), 
+		  .milhar(milhar_y), 
+		  .centena(centena_y), 
+		  .dezena(dezena_y), 
+		  .unidade(unidade_y)
+	  );
+	  
+	  
+	  wire [6:0] seg5_x, seg4_x, seg3_x, seg2_x, seg1_x, seg0_x;
+	  wire [6:0] seg5_x1, seg4_x1, seg3_x1, seg2_x1, seg1_x1, seg0_x1;
+	  wire [6:0] seg5_x2, seg4_x2, seg3_x2, seg2_x2, seg1_x2, seg0_x2;
+	  wire [6:0] seg5_y, seg4_y, seg3_y, seg2_y, seg1_y, seg0_y;
+	  
+		  
     // --- Decodificação BCD para 7 Segmentos de REG_x ---
-     /*
 	  bcd_to_7seg bcd_x5 ( .bcd(cem_milhar_x), .seg(seg5_x) );
      bcd_to_7seg bcd_x4 ( .bcd(dez_milhar_x), .seg(seg4_x) );
      bcd_to_7seg bcd_x3 ( .bcd(milhar_x),     .seg(seg3_x) );
@@ -222,7 +223,7 @@ module integrador (
      bcd_to_7seg bcd_x22 ( .bcd(centena_x2),    .seg(seg2_x2) );
      bcd_to_7seg bcd_x21 ( .bcd(dezena_x2),     .seg(seg1_x2) );
      bcd_to_7seg bcd_x20 ( .bcd(unidade_x2),    .seg(seg0_x2) );
-     */
+  
      bcd_to_7seg bcd_y5 ( .bcd(cem_milhar_y), .seg(seg5_y) );
      bcd_to_7seg bcd_y4 ( .bcd(dez_milhar_y), .seg(seg4_y) );
      bcd_to_7seg bcd_y3 ( .bcd(milhar_y),     .seg(seg3_y) );
@@ -231,111 +232,110 @@ module integrador (
      bcd_to_7seg bcd_y0 ( .bcd(unidade_y),    .seg(seg0_y) );
 	  
 	  
- 
-endmodule 
+	 // seletor 00 = x
+    // seletor 01 = y
+    // seletor 10 = x1		
+    // seletor 11 = x2
 
-module complementoDe2_24bits_novo (
-    input  wire [23:0] A,
-    input  wire       bs,
-    output wire [23:0] out
-);
-    wire [23:0] notA, carry;
+	 mux_4x1 mux00(.a(seg0_x), .b(seg0_y), .c(seg0_x1), .d(seg0_x2), .sel(sel), .S(s0)); 
+	 mux_4x1 mux01(.a(seg1_x), .b(seg1_y), .c(seg1_x1), .d(seg1_x2), .sel(sel), .S(s1));
+	 mux_4x1 mux02(.a(seg2_x), .b(seg2_y), .c(seg2_x1), .d(seg2_x2), .sel(sel), .S(s2));
+	 mux_4x1 mux03(.a(seg3_x), .b(seg3_y), .c(seg3_x1), .d(seg3_x2), .sel(sel), .S(s3));
+	 mux_4x1 mux04(.a(seg4_x), .b(seg4_y), .c(seg4_x1), .d(seg4_x2), .sel(sel), .S(s4));
+	 mux_4x1 mux05(.a(seg5_x), .b(seg5_y), .c(seg5_x1), .d(seg5_x2), .sel(sel), .S(s5)); 
+	  
 	 
-    xor x0 (notA[0], A[0], bs);
-    xor x1 (notA[1], A[1], bs);
-    xor x2 (notA[2], A[2], bs);
-    xor x3 (notA[3], A[3], bs);
-    xor x4 (notA[4], A[4], bs);
-    xor x5 (notA[5], A[5], bs);
-    xor x6 (notA[6], A[6], bs);
-    xor x8 (notA[7], A[7], bs);
-	 xor x9 (notA[8], A[8], bs);
-	 xor x10 (notA[9], A[9], bs);
-	 xor x11(notA[10], A[10], bs);
-	 xor x12(notA[11], A[11], bs);
-	 xor x13(notA[12], A[12], bs);
-	 xor x14(notA[13], A[13], bs);
-	 xor x15 (notA[14], A[14], bs);
-	 xor x16(notA[15], A[15], bs);
-	 xor x17(notA[16], A[16], bs);
-	 xor x18 (notA[17], A[17], bs);
-	 xor x19(notA[18], A[18], bs);
-	 xor x20(notA[19], A[19], bs);
-	 xor x21(notA[20], A[20], bs);
-	 xor x22(notA[21], A[21], bs);
-	 xor x23(notA[22], A[22], bs);
-	 xor x24(notA[23], A[23], bs);
-	 
-
-    somador_completo fa1 (.A(notA[0]), .B(1'b0), .cin(bs),       .S(out[0]), .cout(carry[0]));
-    somador_completo fa2 (.A(notA[1]), .B(1'b0), .cin(carry[0]), .S(out[1]), .cout(carry[1]));
-    somador_completo fa3 (.A(notA[2]), .B(1'b0), .cin(carry[1]), .S(out[2]), .cout(carry[2]));
-    somador_completo fa4 (.A(notA[3]), .B(1'b0), .cin(carry[2]), .S(out[3]), .cout(carry[3]));
-    somador_completo fa5 (.A(notA[4]), .B(1'b0), .cin(carry[3]), .S(out[4]), .cout(carry[4]));
-    somador_completo fa6 (.A(notA[5]), .B(1'b0), .cin(carry[4]), .S(out[5]), .cout(carry[5]));
-    somador_completo fa7 (.A(notA[6]), .B(1'b0), .cin(carry[5]), .S(out[6]), .cout(carry[6]));
-    somador_completo fa8 (.A(notA[7]), .B(1'b0), .cin(carry[6]), .S(out[7]), .cout(carry[7]));
-	 
-	 somador_completo (.A(notA[8]), .B(1'b0), .cin(carry[7]), .S(out[8]), .cout(carry[8]));
-	 somador_completo (.A(notA[9]), .B(1'b0), .cin(carry[8]), .S(out[9]), .cout(carry[9]));
-	 somador_completo (.A(notA[10]), .B(1'b0), .cin(carry[9]), .S(out[10]), .cout(carry[10]));
-	 somador_completo (.A(notA[11]), .B(1'b0), .cin(carry[10]), .S(out[11]), .cout(carry[11]));
-	 somador_completo (.A(notA[12]), .B(1'b0), .cin(carry[11]), .S(out[12]), .cout(carry[12]));
-	 somador_completo (.A(notA[13]), .B(1'b0), .cin(carry[12]), .S(out[13]), .cout(carry[13]));
-	 somador_completo (.A(notA[14]), .B(1'b0), .cin(carry[13]), .S(out[14]), .cout(carry[14]));
-	 somador_completo (.A(notA[15]), .B(1'b0), .cin(carry[14]), .S(out[15]), .cout(carry[15]));
-	 somador_completo (.A(notA[16]), .B(1'b0), .cin(carry[15]), .S(out[16]), .cout(carry[16]));
-	 somador_completo (.A(notA[17]), .B(1'b0), .cin(carry[16]), .S(out[17]), .cout(carry[17]));
-	 somador_completo (.A(notA[18]), .B(1'b0), .cin(carry[17]), .S(out[18]), .cout(carry[18]));
-	 somador_completo (.A(notA[19]), .B(1'b0), .cin(carry[18]), .S(out[19]), .cout(carry[19]));
-	 somador_completo (.A(notA[20]), .B(1'b0), .cin(carry[19]), .S(out[20]), .cout(carry[20]));
-	 somador_completo (.A(notA[21]), .B(1'b0), .cin(carry[20]), .S(out[21]), .cout(carry[21]));
-	 somador_completo (.A(notA[22]), .B(1'b0), .cin(carry[21]), .S(out[22]), .cout(carry[22]));
-	 somador_completo (.A(notA[23]), .B(1'b0), .cin(carry[22]), .S(out[23]), .cout(carry[23]));
-
 endmodule
-     
 
-// Mux 4:1 estrutural genérico de 7 bits
-module mux4to1_7bit (
-    input  [6:0] in_a,
-    input  [6:0] in_b,
-    input  [6:0] in_c,
-    input  [1:0] sel,
-    output [6:0] out
+
+
+
+module extensao_pra_24bits (
+    input  [7:0]  sw,
+    input  [8:0]  x1, x2,
+    output [23:0] shift_x, shift_x1, shift_x2
 );
-    // Para cada um dos 7 segmentos, faz a combinação lógica estrutural do MUX 4:1:
-    // sel = 00 -> in_a
-    // sel = 01 -> in_b
-    // sel = 10 ou 11 -> in_c
-    
-    genvar i;
-    generate
-        for (i = 0; i < 7; i = i + 1) begin : gen_mux
-            wire not_sel1, not_sel0;
-            wire term_a, term_b, term_c1, term_c2;
 
-            not (not_sel1, sel[1]);
-            not (not_sel0, sel[0]);
-
-            // mintermos para seleção:
-            // sel == 00 -> in_a
-            and (term_a, in_a[i], not_sel1, not_sel0);
-            
-            // sel == 01 -> in_b
-            and (term_b, in_b[i], not_sel1, sel[0]);
-            
-            // sel == 10 -> in_c
-            and (term_c1, in_c[i], sel[1], not_sel0);
-            
-            // sel == 11 -> in_c
-            and (term_c2, in_c[i], sel[1], sel[0]);
-
-            // Saída = OU dos mintermos
-            or (out[i], term_a, term_b, term_c1, term_c2);
-        end
-    endgenerate
+	  buf (shift_x1[0], x1[0]);
+	  buf (shift_x1[1], x1[1]);
+	  buf (shift_x1[2], x1[2]);
+	  buf (shift_x1[3], x1[3]);
+	  buf (shift_x1[4], x1[4]);
+	  buf (shift_x1[5], x1[5]);
+	  buf (shift_x1[6], x1[6]);
+	  buf (shift_x1[7], x1[7]);
+	  buf (shift_x1[8], x1[8]);
+	  buf (shift_x1[9], x1[8]);
+	  buf (shift_x1[10], x1[8]);
+	  buf (shift_x1[11], x1[8]);
+	  buf (shift_x1[12], x1[8]);
+	  buf (shift_x1[13], x1[8]);
+	  buf (shift_x1[14], x1[8]);
+	  buf (shift_x1[15], x1[8]);
+	  buf (shift_x1[16], x1[8]);
+	  buf (shift_x1[17], x1[8]);
+	  buf (shift_x1[18], x1[8]);
+	  buf (shift_x1[19], x1[8]);
+	  buf (shift_x1[20], x1[8]);
+	  buf (shift_x1[21], x1[8]);
+	  buf (shift_x1[22], x1[8]);
+	  buf (shift_x1[23], x1[8]);
+	  
+	  buf (shift_x2[0], x2[0]);
+	  buf (shift_x2[1], x2[1]);
+	  buf (shift_x2[2], x2[2]);
+	  buf (shift_x2[3], x2[3]);
+	  buf (shift_x2[4], x2[4]);
+	  buf (shift_x2[5], x2[5]);
+	  buf (shift_x2[6], x2[6]);
+	  buf (shift_x2[7], x2[7]);
+	  buf (shift_x2[8], x2[8]);
+	  buf (shift_x2[9], x2[8]);
+	  buf (shift_x2[10], x2[8]);
+	  buf (shift_x2[11], x2[8]);
+	  buf (shift_x2[12], x2[8]);
+	  buf (shift_x2[13], x2[8]);
+	  buf (shift_x2[14], x2[8]);
+	  buf (shift_x2[15], x2[8]);
+	  buf (shift_x2[16], x2[8]);
+	  buf (shift_x2[17], x2[8]);
+	  buf (shift_x2[18], x2[8]);
+	  buf (shift_x2[19], x2[8]);
+	  buf (shift_x2[20], x2[8]);
+	  buf (shift_x2[21], x2[8]);
+	  buf (shift_x2[22], x2[8]);
+	  buf (shift_x2[23], x2[8]);
+	  
+	  buf (shift_x[0], sw[0]);
+	  buf (shift_x[1], sw[1]);
+	  buf (shift_x[2], sw[2]);
+	  buf (shift_x[3], sw[3]);
+	  buf (shift_x[4], sw[4]);
+	  buf (shift_x[5], sw[5]);
+	  buf (shift_x[6], sw[6]);
+	  buf (shift_x[7], sw[7]);
+	  buf (shift_x[8], sw[7]);
+	  buf (shift_x[9], sw[7]);
+	  buf (shift_x[10], sw[7]);
+	  buf (shift_x[11], sw[7]);
+	  buf (shift_x[12], sw[7]);
+	  buf (shift_x[13], sw[7]);
+	  buf (shift_x[14], sw[7]);
+	  buf (shift_x[15], sw[7]);
+	  buf (shift_x[16], sw[7]);
+	  buf (shift_x[17], sw[7]);
+	  buf (shift_x[18], sw[7]);
+	  buf (shift_x[19], sw[7]);
+	  buf (shift_x[20], sw[7]);
+	  buf (shift_x[21], sw[7]);
+	  buf (shift_x[22], sw[7]);
+	  buf (shift_x[23], sw[7]);
 endmodule
+
+
+
+
+
 
 
 
