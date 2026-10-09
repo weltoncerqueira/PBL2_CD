@@ -6,7 +6,7 @@ module integrador (
     input reset,
  
     output [6:0] s0, s1, s2, s3, s4, s5,
-	 output sinal_negativo,
+	 output sinal_negativo, delta_negativo, a_zero,
 	 output sel_a, sel_b, sel_c
     
 );
@@ -49,7 +49,7 @@ module integrador (
     registrador_8b reg8_b (.D(sw), .enable(sel_b), .rst(rst_interno), .clk(clk), .S(reg_b));
     registrador_8b reg8_c (.D(sw), .enable(sel_c), .rst(rst_interno), .clk(clk), .S(reg_c));
     
-     wire [8:0] x1, x2;
+     wire [8:0] x1, x2, x1_zerado, x2_zerado;
      wire [17:0] delta;
      wire [23:0] y;
      
@@ -105,24 +105,34 @@ module integrador (
 		  .x(sw),
 		  .sinal_negativo(sinal_negativo)
 		);
+		
 	 
      //Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
-	  //Dá pra fazer usando mux que seleciona entre o x1 e x2 normal ou zerado
-	  //a depender do valor de delta_negativo
-     wire delta_negativo;
      or (delta_negativo, delta_negativo1, delta_negativo2);
+	  
+	  delta_negativo delta2 (
+		  .x1(x1), 
+		  .x2(x2), 
+		  .sinal_delta(delta_negativo),
+		  .x1_saida(x1_zerado), 
+		  .x2_saida(x2_zerado)
+	  );
+	  
+	  //Verifica se o valor de (a) é zero e aciona a flag
+	  and (a_zero, reg_a[0], reg_a[1],  reg_a[2], reg_a[3], 
+						reg_a[4], reg_a[5], reg_a[6], reg_a[7]);
+	  
+	  
 		
-	
 	  //Extensão das variaveis x1, x2 e x para 24 bits
 	  extensao_pra_24bits extende(
 		  .sw(sw), 
-		  .x1(x1), 
-		  .x2(x2),
+		  .x1(x1_zerado), 
+		  .x2(x2_zerado),
 		  .shift_x(shift_x),
 		  .shift_x1(shift_x1), 
 		  .shift_x2(shift_x2)
 	  );
-		
 		
 	  //complemento de dois do y
 	  complementoDe2_24bits comple24b_y(
@@ -249,6 +259,41 @@ module integrador (
 	  
 	 
 endmodule
+
+
+
+//Verifica se delta é negativo. Caso seja, o valor de x1 e x2 é zerado
+//Dá pra fazer usando mux que seleciona entre o x1 e x2 normal ou zerado
+//a depender do valor de delta_negativo
+
+module delta_negativo (
+	input  [8:0] x1, x2, 
+	input  sinal_delta,
+	output [8:0] x1_saida, x2_saida
+);
+	
+	mux_2x1 mux_01 (.A(x1[0]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[0]));
+	mux_2x1 mux_02 (.A(x1[1]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[1]));
+	mux_2x1 mux_03 (.A(x1[2]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[2]));
+	mux_2x1 mux_04 (.A(x1[3]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[3]));
+	mux_2x1 mux_05 (.A(x1[4]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[4]));
+	mux_2x1 mux_06 (.A(x1[5]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[5]));
+	mux_2x1 mux_07 (.A(x1[6]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[6]));
+	mux_2x1 mux_08 (.A(x1[7]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[7]));
+	mux_2x1 mux_09 (.A(x1[8]), .B(1'b0), .S(sinal_delta), .Y(x1_saida[8]));
+	
+	mux_2x1 mux_11 (.A(x2[0]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[0]));
+	mux_2x1 mux_12 (.A(x2[1]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[1]));
+	mux_2x1 mux_13 (.A(x2[2]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[2]));
+	mux_2x1 mux_14 (.A(x2[3]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[3]));
+	mux_2x1 mux_15 (.A(x2[4]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[4]));
+	mux_2x1 mux_16 (.A(x2[5]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[5]));
+	mux_2x1 mux_17 (.A(x2[6]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[6]));
+	mux_2x1 mux_18 (.A(x2[7]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[7]));
+	mux_2x1 mux_19 (.A(x2[8]), .B(1'b0), .S(sinal_delta), .Y(x2_saida[8]));
+		
+endmodule
+
 
 
 module verifica_sinal (
