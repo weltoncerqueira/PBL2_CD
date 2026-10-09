@@ -418,10 +418,6 @@ endmodule
 
 
 
-
-
-
-
 //registrador_8b.v
 module registrador_8b (
     input        clk,

@@ -57,7 +57,6 @@ set_global_assignment -name VERILOG_FILE raiz_Quadrada.v
 set_global_assignment -name VERILOG_FILE calculo_delta.v
 set_global_assignment -name VERILOG_FILE bin_pra_decimal.v
 set_global_assignment -name VERILOG_FILE bcd_to_7seg.v
-set_global_assignment -name VERILOG_FILE seletor_xy.v
 set_global_assignment -name VERILOG_FILE calcula_x1.v
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
@@ -66,7 +65,6 @@ set_global_assignment -name VERILOG_FILE divisor_9x9_sinalizado.v
 set_global_assignment -name VERILOG_FILE calcula_y.v
 set_global_assignment -name VERILOG_FILE multiplicador_16x8.v
 set_global_assignment -name VERILOG_FILE integrador.v
-set_global_assignment -name VERILOG_FILE tb_integrador.v
 set_location_assignment PIN_P11 -to clk
 set_location_assignment PIN_A7 -to botao
 set_location_assignment PIN_B8 -to reset
@@ -131,4 +129,5 @@ set_location_assignment PIN_A9 -to sel_b
 set_location_assignment PIN_A10 -to sel_c
 set_location_assignment PIN_A11 -to delta_negativo
 set_location_assignment PIN_D14 -to a_zero
+set_global_assignment -name VERILOG_FILE mux_4x1.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
