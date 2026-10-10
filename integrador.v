@@ -119,7 +119,7 @@ module integrador (
 	  );
 	  
 	  //Verifica se o valor de (a) é zero e aciona a flag
-	  and (a_zero, reg_a[0], reg_a[1],  reg_a[2], reg_a[3], 
+	  nor (a_zero, reg_a[0], reg_a[1],  reg_a[2], reg_a[3], 
 						reg_a[4], reg_a[5], reg_a[6], reg_a[7]);
 	  
 	  
